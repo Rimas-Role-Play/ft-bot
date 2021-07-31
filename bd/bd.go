@@ -69,9 +69,9 @@ func GetUidByDiscordCode(uid string) (string, error) {
 	return "", nil
 }
 
-func FireNewRegisteredUser(uid string, discordUid string, discordName string, discordEmail string) error {
+func FireNewRegisteredUser(uid string, discordUid string, discordName string, discordDiscriminator string, discordEmail string) error {
 
-	_, err := bd.Exec("insert into discord_users (uid, discord_uid, discord_name, discord_email) values (?,?,?,?)",uid,discordUid, discordName, discordEmail)
+	_, err := bd.Exec("insert into discord_users (uid, discord_uid, discord_name, discord_discriminator, discord_email) values (?,?,?,?,?)",uid,discordUid, discordName, discordDiscriminator, discordEmail)
 	if err != nil {
 		return err
 	}
