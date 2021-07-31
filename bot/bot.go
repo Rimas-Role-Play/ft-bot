@@ -40,14 +40,9 @@ func Start() {
 
 	bd.ConnectDatabase()
 
-	playerUid, err := bd.GetUidByDiscordCode("dsd6vlcT1hTpA")
-
 	if err != nil {
 		fmt.Println(err.Error())
 	}
-
-	bd.FireNewRegisteredUser(playerUid,"25564687468161684","FairyTale#5571","a3atlaslife@gmail.com")
-
 	fmt.Println("Bot is running!")
 }
 
@@ -71,36 +66,36 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 
 		switch content {
-		case "!help":
-			_, _ = s.ChannelMessageSend(m.ChannelID, "pong")
-		case "!pong":
-			_, _ = s.ChannelMessageSend(m.ChannelID, "ping")
-		case "!register":
-			playerUid, err := bd.GetUidByDiscordCode(inputSplit[1])
+			case "!help":
+				_, _ = s.ChannelMessageSend(m.ChannelID, "Помогу, но потом")
+			case "!register":
+				if len(inputSplit) < 2 {
+					_, _ = s.ChannelMessageSend(m.ChannelID, "После команды !register требуется ввести код, который вы можете увидеть в личном кабинете https://lk.rimasrp.life/")
+					return
+				}
+				playerUid, err := bd.GetUidByDiscordCode(inputSplit[1])
 
-			if err != nil {
-				fmt.Println(err.Error())
-				_, _ = s.ChannelMessageSend(m.ChannelID, err.Error())
-				return
-			}
-			if playerUid == "" {
+				if err != nil {
+					fmt.Println(err.Error())
+					_, _ = s.ChannelMessageSend(m.ChannelID, err.Error())
+					return
+				}
+				if playerUid == "" {
+					log := logger.WithFields(logger.Fields{"Code": inputSplit[1], "Discord":m.Author.Username})
+					log.Info("Undefined code: ")
+					_, _ = s.ChannelMessageSend(m.ChannelID, "Код не определен! Ваш личный код, вы можете увидеть в личном кабинете https://lk.rimasrp.life/")
+					return
+				}
 
-				log := logger.WithFields(logger.Fields{"Code:": inputSplit[1], "Discord":m.Author.Username})
-				log.Info("Undefined code: ")
-				_, _ = s.ChannelMessageSend(m.ChannelID, "Код не определен! Ваш личный код, вы можете увидеть в личном кабинете https://lk.rimasrp.life/")
-				return
-			}
+				if !bd.CheckRegistered(m.Author.ID) {
+					_, _ = s.ChannelMessageSend(m.ChannelID, "Этот аккаунт уже закреплен! При необходимости открепления, обратитесь к администратору!")
+					return
+				}
+				_ = bd.FireNewRegisteredUser(playerUid, m.Author.ID, m.Author.Username, m.Author.Discriminator, m.Author.Email)
+				_, _ = s.ChannelMessageSend(m.ChannelID, "Вы успешно привязали свой аккаунт, ваш аккаунт на сервере синхронизирован!")
 
-			if !bd.CheckRegistered(m.Author.ID) {
-				_, _ = s.ChannelMessageSend(m.ChannelID, "Этот аккаунт уже закреплен! При необходимости открепления, обратитесь к администратору!")
-				return
-			}
-
-			bd.FireNewRegisteredUser(playerUid, m.Author.ID, m.Author.Username, m.Author.Email)
-			_, _ = s.ChannelMessageSend(m.ChannelID, "Вы успешно привязали свой аккаунт, ваш аккаунт на сервере синхронизирован!")
-
-			log := logger.WithFields(logger.Fields{"Steam:":playerUid, "Discord":m.Author.Username})
-			log.Info("Registered new user")
+				log := logger.WithFields(logger.Fields{"Steam":playerUid, "Discord":m.Author.Username})
+				log.Info("Registered new user")
 		}
 	}
 }
