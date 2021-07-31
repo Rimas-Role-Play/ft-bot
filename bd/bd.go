@@ -93,14 +93,34 @@ func CheckRegistered(user string) bool {
 		fmt.Println(err.Error())
 		return false
 	}
+	defer rows.Close()
 
 	for rows.Next() {
 		var title string
 		rows.Scan(&title)
-		fmt.Println(title)
 		if title == "false" {
 			return true
 		}
 	}
 	return false
+}
+
+func ScanQueue() {
+	statement, err := bd.Prepare(`select uid from discord_queue`)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	defer statement.Close()
+	query, err := statement.Query()
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+	defer query.Close()
+
+	for query.Next() {
+
+	}
+
 }
