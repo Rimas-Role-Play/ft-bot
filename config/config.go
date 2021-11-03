@@ -42,8 +42,6 @@ func ReadConfig() error {
 		return err
 	}
 
-	fmt.Println(string(file))
-
 	err = json.Unmarshal(file, &cfg)
 
 	if err != nil {

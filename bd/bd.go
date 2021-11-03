@@ -2,9 +2,9 @@ package bd
 
 import (
 	"database/sql"
-	"errors"
 	"fmt"
 	"ft-bot/config"
+	"log"
 )
 
 var bd *sql.DB
@@ -42,85 +42,36 @@ func ConnectDatabase() (*sql.DB, error) {
 	return bd, nil
 }
 
-func GetUidByDiscordCode(uid string) (string, error) {
 
-	statement, err := bd.Prepare("select playerid from players where discord_code = ?")
 
+func GetPlayer(pid string) string {
+
+	type Player struct {
+		Uid uint32
+		SteamId string
+		Name string
+		FName string
+		LName string
+		Nickname string
+	}
+	var plr Player
+
+	rows, err := bd.Query("select p.uid, p.playerid, p.name, p.first_name, p.last_name, p.nick_name from players p inner join discord_users du on p.playerid = du.uid inner join player_hardwares ph on p.playerid = ph.uid where ph.discord_id = ? or du.discord_uid = ?", pid, pid)
 	if err != nil {
-		fmt.Println(err.Error())
-		return "", err
+		log.Println(err.Error())
+		return err.Error()
 	}
-	defer statement.Close()
-
-	rows, err := statement.Query(uid)
-	if err != nil {
-		fmt.Println(err.Error())
-		return "", err
-	}
-
-	for rows.Next() {
-		var title string
-		rows.Scan(&title)
-		if title == "" {
-			return "", errors.New("Код не определен")
-		}
-		return title, nil
-	}
-	return "", nil
-}
-
-func FireNewRegisteredUser(uid string, discordUid string, discordName string, discordDiscriminator string, discordEmail string) error {
-
-	_, err := bd.Exec("insert into discord_users (uid, discord_uid, discord_name, discord_discriminator, discord_email) values (?,?,?,?,?)",uid,discordUid, discordName, discordDiscriminator, discordEmail)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func CheckRegistered(user string) bool {
-
-	statement, err := bd.Prepare(`select case when exists (select id from discord_users where discord_uid = ?) then "true" else "false" end`)
-
-	if err != nil {
-		fmt.Println(err.Error())
-		return false
-	}
-	defer statement.Close()
-
-	rows, err := statement.Query(user)
-	if err != nil {
-		fmt.Println(err.Error())
-		return false
-	}
+	log.Println(rows.Err())
 	defer rows.Close()
 
 	for rows.Next() {
-		var title string
-		rows.Scan(&title)
-		if title == "false" {
-			return true
+		if err := rows.Scan(&plr.Uid,&plr.SteamId,&plr.Name,&plr.FName,&plr.LName,&plr.Nickname); err != nil {
+			log.Println(err.Error())
+			return err.Error()
 		}
 	}
-	return false
-}
-
-func ScanQueue() {
-	statement, err := bd.Prepare(`select uid from discord_queue`)
-	if err != nil {
-		fmt.Println(err.Error())
-		return
+	if len(plr.SteamId) == 0 {
+		return "Никто не найден"
 	}
-	defer statement.Close()
-	query, err := statement.Query()
-	if err != nil {
-		fmt.Println(err.Error())
-		return
-	}
-	defer query.Close()
-
-	for query.Next() {
-
-	}
-
+	return fmt.Sprintf("Игрок: %v\nID: %d\nPID: %v\nИмя: %v\nФамилия: %v\nНик: %v\n",plr.Name,plr.Uid,plr.SteamId,plr.FName,plr.LName,plr.Nickname)
 }

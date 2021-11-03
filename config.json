@@ -3,7 +3,7 @@
   "BotPrefix": "!",
   "IpDatabase": "database.rimasrp.life",
   "Port": "3306",
-  "Database": "altislife",
+  "Database": "altislife3",
   "User": "aliases",
   "Password": "32161924374"
 }

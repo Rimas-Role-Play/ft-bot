@@ -5,13 +5,16 @@ import (
 	"ft-bot/bd"
 	"ft-bot/config"
 	"github.com/bwmarrin/discordgo"
-	logger "github.com/sirupsen/logrus"
 	_ "github.com/go-sql-driver/mysql"
+	"log"
+	"regexp"
 	"strings"
 )
 
 var BotID string
 var goBot *discordgo.Session
+
+var adminIds map[string]int
 
 func Start() {
 	goBot, err := discordgo.New("Bot " + config.Token)
@@ -46,10 +49,39 @@ func Start() {
 	fmt.Println("Bot is running!")
 }
 
+func IsAllowedToUse(s *discordgo.Session, channelID string, roleID []string) bool {
+
+	var ok bool
+	if len(roleID) > 0 {
+		_, ok = adminIds[roleID[0]]
+		if ok == true {
+			return ok
+		}
+	}
+	s.ChannelMessageSend(channelID, fmt.Sprintf("Insuficient permissions"))
+	return ok
+}
+
+func IsDiscordAdmin(s *discordgo.Session, id string) bool {
+	g, _ := s.GuildMember("719969719871995958", id)
+	roles := g.Roles
+	for idx, _ := range roles {
+		if roles[idx] == "775499720222310411" || roles[idx] == "878824238075748372" {
+			return true
+		}
+	}
+	return false
+}
+
 func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if strings.HasPrefix(m.Content, config.BotPrefix) {
 		if m.Author.ID == BotID {
+			return
+		}
+
+		if !IsDiscordAdmin(s, m.Author.ID ) {
+			log.Printf("%v попытался использовать!\n", m.Author)
 			return
 		}
 
@@ -63,39 +95,27 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 				vars = append(vars, inputSplit[idx])
 			}
 		}
-
-
+		log.Println(vars)
 		switch content {
-			case "!help":
-				_, _ = s.ChannelMessageSend(m.ChannelID, "Помогу, но потом")
-			case "!register":
-				if len(inputSplit) < 2 {
-					_, _ = s.ChannelMessageSend(m.ChannelID, "После команды !register требуется ввести код, который вы можете увидеть в личном кабинете https://lk.rimasrp.life/")
-					return
-				}
-				playerUid, err := bd.GetUidByDiscordCode(inputSplit[1])
-
-				if err != nil {
-					fmt.Println(err.Error())
-					_, _ = s.ChannelMessageSend(m.ChannelID, err.Error())
-					return
-				}
-				if playerUid == "" {
-					log := logger.WithFields(logger.Fields{"Code": inputSplit[1], "Discord":m.Author.Username})
-					log.Info("Undefined code: ")
-					_, _ = s.ChannelMessageSend(m.ChannelID, "Код не определен! Ваш личный код, вы можете увидеть в личном кабинете https://lk.rimasrp.life/")
-					return
-				}
-
-				if !bd.CheckRegistered(m.Author.ID) {
-					_, _ = s.ChannelMessageSend(m.ChannelID, "Этот аккаунт уже закреплен! При необходимости открепления, обратитесь к администратору!")
-					return
-				}
-				_ = bd.FireNewRegisteredUser(playerUid, m.Author.ID, m.Author.Username, m.Author.Discriminator, m.Author.Email)
-				_, _ = s.ChannelMessageSend(m.ChannelID, "Вы успешно привязали свой аккаунт, ваш аккаунт на сервере синхронизирован!")
-
-				log := logger.WithFields(logger.Fields{"Steam":playerUid, "Discord":m.Author.Username})
-				log.Info("Registered new user")
+		case "!help":
+			_, _ = s.ChannelMessageSend(m.ChannelID, "Помогу, но потом")
+		case "!getHim":
+			if len(vars) < 1 {
+				_, _ = s.ChannelMessageSend(m.ChannelID, "Тегните пользователя, например ```!getHim @SomeUser```")
+				return
+			}
+			re := regexp.MustCompile(`(?m)[^0-9]`)
+			pid := re.ReplaceAllString(vars[0], ``)
+			log.Println(pid)
+			if len(pid) != 18 {
+				_, _ = s.ChannelMessageSend(m.ChannelID, "Неверный ID")
+				return
+			}
+			_, _ = s.ChannelMessageSend(m.ChannelID, bd.GetPlayer(pid))
+		case "!removeHim":
+			_, _ = s.ChannelMessageSend(m.ChannelID, "Аккаунт отвязан")
+		case "!applyRoles":
+			_, _ = s.ChannelMessageSend(m.ChannelID, "Roles refreshed")
 		}
 	}
 }
