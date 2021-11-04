@@ -16,7 +16,7 @@ var (
 	Database 	string
 	User 		string
 	Password 	string
-
+	GuildId 	string
 	cfg *configStruct
 )
 
@@ -30,6 +30,7 @@ type configStruct struct {
 	Database 	string `json:"Database"`
 	User 		string `json:"User"`
 	Password 	string `json:"Password"`
+	GuildId 	string `json:"GuildId"`
 }
 
 func ReadConfig() error {
@@ -57,5 +58,6 @@ func ReadConfig() error {
 	Database 	= cfg.Database
 	User 		= cfg.User
 	Password 	= cfg.Password
+	GuildId 	= cfg.GuildId
 	return nil
 }
