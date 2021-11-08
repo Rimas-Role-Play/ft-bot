@@ -2,6 +2,7 @@ package bot
 
 import (
 	"ft-bot/bd"
+	"ft-bot/config"
 	"github.com/bwmarrin/discordgo"
 	"log"
 )
@@ -18,6 +19,23 @@ func IsDiscordAdmin(s *discordgo.Session, id string) bool {
 	}
 	log.Println("Admin not found")
 	return false
+}
+
+func RenameUsers() {
+	players := bd.GetAllNameRegisteredPlayers()
+	for idx, _ := range players {
+
+		err := s.GuildMemberNickname(config.GuildId, players[idx].DSUid, players[idx].Name)
+		if err != nil {
+			log.Printf("****************************************************************")
+			log.Println(err.Error())
+			log.Printf("User ID: %v | Uid: %v | Name: %v\n",players[idx].DSUid,players[idx].Uid, players[idx].Name)
+			log.Printf("****************************************************************")
+		}else{
+			log.Printf("User: %v, renamed to: %v | IDX: %d/%d", players[idx].DSUid, players[idx].Name, idx, len(players) - 1)
+		}
+	}
+	log.Printf("Renaming is done")
 }
 
 func SendMessage(s *discordgo.Session, msg string) {

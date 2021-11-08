@@ -98,6 +98,7 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		switch content {
 		case "!help":
 			SendMessage(s, "Помогу, но потом")
+			RenameUsers()
 		}
 	}
 }

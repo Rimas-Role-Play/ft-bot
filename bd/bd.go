@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"ft-bot/config"
+	"ft-bot/store"
 	"log"
 )
 
@@ -42,7 +43,34 @@ func ConnectDatabase() (*sql.DB, error) {
 	return bd, nil
 }
 
+func RowsCounter(rows *sql.Rows) uint {
+	var i uint
+	for i = 0; rows.Next(); i++ {}
+	return i
+}
 
+func GetAllNameRegisteredPlayers() []store.Player {
+
+
+	rows, err := bd.Query("select du.discord_uid, p.playerid, p.name from players p inner join discord_users du on p.playerid = du.uid inner join player_hardwares ph on p.playerid = ph.uid")
+	var plr []store.Player
+
+	if err != nil {
+		log.Println(err.Error())
+		return plr
+	}
+	defer rows.Close()
+
+	var DSUid, Uid, Name string
+	for rows.Next() {
+		if err := rows.Scan(&DSUid,&Uid,&Name); err != nil {
+			log.Println(err.Error())
+			return plr
+		}
+		plr = append(plr, store.Player{DSUid: DSUid, SteamId:Uid, Name:Name })
+	}
+	return plr
+}
 
 func GetPlayer(pid string) string {
 
