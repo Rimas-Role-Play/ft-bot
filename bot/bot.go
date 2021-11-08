@@ -3,14 +3,12 @@ package bot
 import (
 	"flag"
 	"fmt"
-	"ft-bot/bd"
 	"ft-bot/config"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"os"
 	"os/signal"
-	"regexp"
 	"strings"
 )
 
@@ -23,73 +21,55 @@ var (
 var s *discordgo.Session
 
 var BotID string
-var goBot *discordgo.Session
-
-func main() {
-	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
-		log.Println("Bot is up!")
-	})
-	err := s.Open()
-	if err != nil {
-		log.Fatalf("Cannot open the session: %v", err)
-	}
-
-	defer s.Close()
-
-	stop := make(chan os.Signal)
-	signal.Notify(stop, os.Interrupt)
-	<-stop
-	log.Println("Gracefully shutdowning")
-}
-
-func init() { flag.Parse() }
-
-func init() {
-	var err error
-	s, err = discordgo.New("Bot " + *BotToken)
-	if err != nil {
-		log.Fatalf("Invalid bot parameters: %v", err)
-	}
-
-	bd.ConnectDatabase()
-	fmt.Println("Bot is running!")
-}
 
 func Start() {
-	goBot, err := discordgo.New("Bot " + config.Token)
+	var err error
+	s, err = discordgo.New("Bot " + config.Token)
 
 	if err != nil {
 		fmt.Println(err.Error())
 		return
 	}
 
-	u, err := goBot.User("@me")
+	u, err := s.User("@me")
 	if err != nil {
 		fmt.Println(err.Error())
 	}
 
 	BotID = u.ID
-	goBot.AddHandler(messageHandler)
-	err = goBot.Open()
+	s.AddHandler(messageHandler)
+	s.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+		if h, ok := commandHandlers[i.ApplicationCommandData().Name]; ok {
+			h(s, i)
+			log.Printf("Command %v called\n", i.ApplicationCommandData().Name)
+		}
+	})
+
+	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
+		log.Println("Bot is up!")
+	})
+
+	err = s.Open()
 	if err != nil {
-		fmt.Println(err.Error())
+		log.Fatalf("Cannot open the session: %v", err)
 		return
 	}
-}
+	defer s.Close()
 
-func IsDiscordAdmin(s *discordgo.Session, id string) bool {
-	g, _ := s.GuildMember("719969719871995958", id)
-	roles := g.Roles
-	for idx, _ := range roles {
-		if roles[idx] == "775499720222310411" || roles[idx] == "878824238075748372" {
-			return true
+	for _, v := range commands {
+
+		_, err := s.ApplicationCommandCreate(s.State.User.ID, *GuildID, v)
+		if err != nil {
+			log.Panicf("Cannot create '%v' command: %v", v.Name, err)
 		}
+		log.Printf("Command %v created", v.Name)
 	}
-	return false
-}
 
-func SendMessage(s *discordgo.Session, msg string) {
-	s.ChannelMessageSend("864640641891696641", msg)
+	log.Println("Start goroutine")
+	stop := make(chan os.Signal)
+	signal.Notify(stop, os.Interrupt)
+	<-stop
+	log.Println("Gracefully shutdown")
 }
 
 func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
@@ -118,23 +98,6 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		switch content {
 		case "!help":
 			SendMessage(s, "Помогу, но потом")
-		case "!getHim":
-			if len(vars) == 0 || len(vars) > 1 {
-				SendMessage(s, "Тегните пользователя, например ```!getHim @SomeUser```")
-				return
-			}
-			re := regexp.MustCompile(`(?m)[^0-9]`)
-			pid := re.ReplaceAllString(vars[0], ``)
-			if len(pid) != 18 {
-				SendMessage(s, "Неверный ID")
-				return
-			}
-			SendMessage(s, bd.GetPlayer(pid))
-		case "!removeHim":
-			SendMessage(s, "Аккаунт отвязан")
-		case "!applyRoles":
-			SendMessage(s, "Roles refreshed")
 		}
-		s.ChannelMessageDelete(m.Message.ChannelID, m.Message.ID)
 	}
 }

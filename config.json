@@ -3,8 +3,8 @@
   "BotPrefix": "!",
   "IpDatabase": "database.rimasrp.life",
   "Port": "3306",
-  "Database": "altislife3",
+  "Database": "altislife",
   "User": "aliases",
   "Password": "32161924374",
-  "GuildId": "719969719871995958"
+  "GuildId": "550476929355087874"
 }

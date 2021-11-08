@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"ft-bot/bd"
 	"ft-bot/bot"
 	"ft-bot/config"
 )
@@ -13,6 +14,7 @@ func main() {
 		fmt.Println(err.Error())
 		return
 	}
+	bd.ConnectDatabase()
 
 	fmt.Printf(` 
 	________  .__                               .___
@@ -23,7 +25,5 @@ func main() {
 	\_______\/        \/_____/   %-16s\/`+"\n\n", "1.0.0")
 
 	bot.Start()
-
-	<-make(chan struct{})
 	return
 }

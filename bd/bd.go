@@ -50,13 +50,12 @@ func GetPlayer(pid string) string {
 		Uid uint32
 		SteamId string
 		Name string
-		FName string
-		LName string
-		Nickname string
+		DonatLevel uint8
+		RC uint32
 	}
 	var plr Player
 
-	rows, err := bd.Query("select p.uid, p.playerid, p.name, p.first_name, p.last_name, p.nick_name from players p inner join discord_users du on p.playerid = du.uid inner join player_hardwares ph on p.playerid = ph.uid where ph.discord_id = ? or du.discord_uid = ?", pid, pid)
+	rows, err := bd.Query("select p.uid, p.playerid, p.name, p.donorlevel, p.EPoint from players p inner join discord_users du on p.playerid = du.uid inner join player_hardwares ph on p.playerid = ph.uid where ph.discord_id = ? or du.discord_uid = ?", pid, pid)
 	if err != nil {
 		log.Println(err.Error())
 		return err.Error()
@@ -65,7 +64,7 @@ func GetPlayer(pid string) string {
 	defer rows.Close()
 
 	for rows.Next() {
-		if err := rows.Scan(&plr.Uid,&plr.SteamId,&plr.Name,&plr.FName,&plr.LName,&plr.Nickname); err != nil {
+		if err := rows.Scan(&plr.Uid,&plr.SteamId,&plr.Name,&plr.DonatLevel,&plr.RC); err != nil {
 			log.Println(err.Error())
 			return err.Error()
 		}
@@ -73,5 +72,5 @@ func GetPlayer(pid string) string {
 	if len(plr.SteamId) == 0 {
 		return "Никто не найден"
 	}
-	return fmt.Sprintf("Игрок: %v\nID: %d\nPID: %v\nИмя: %v\nФамилия: %v\nНик: %v\n",plr.Name,plr.Uid,plr.SteamId,plr.FName,plr.LName,plr.Nickname)
+	return fmt.Sprintf("Игрок: %v\nID: %d\nPID: %v\nДонат уровень: %d ур.\nRC: %d\n",plr.Name,plr.Uid,plr.SteamId,plr.DonatLevel,plr.RC)
 }
