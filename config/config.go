@@ -4,6 +4,7 @@ package config
 import (
 	"encoding/json"
 	"fmt"
+	"ft-bot/logger"
 	"io/ioutil"
 )
 
@@ -39,14 +40,14 @@ func ReadConfig() error {
 	file, err := ioutil.ReadFile("./config.json")
 
 	if err != nil {
-		fmt.Println(err.Error())
+		logger.PrintLog(err.Error())
 		return err
 	}
 
 	err = json.Unmarshal(file, &cfg)
 
 	if err != nil {
-		fmt.Println(err.Error())
+		logger.PrintLog(err.Error())
 		return err
 	}
 

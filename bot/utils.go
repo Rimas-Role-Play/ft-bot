@@ -3,6 +3,7 @@ package bot
 import (
 	"ft-bot/bd"
 	"ft-bot/config"
+	"ft-bot/logger"
 	"github.com/bwmarrin/discordgo"
 	"log"
 )
@@ -22,20 +23,21 @@ func IsDiscordAdmin(s *discordgo.Session, id string) bool {
 }
 
 func RenameUsers() {
+	logger.PrintLog("Starting rename")
 	players := bd.GetAllNameRegisteredPlayers()
 	for idx, _ := range players {
 
 		err := s.GuildMemberNickname(config.GuildId, players[idx].DSUid, players[idx].Name)
 		if err != nil {
-			log.Printf("****************************************************************")
-			log.Println(err.Error())
-			log.Printf("User ID: %v | Uid: %v | Name: %v\n",players[idx].DSUid,players[idx].Uid, players[idx].Name)
-			log.Printf("****************************************************************")
+			logger.PrintLog("****************************************************************\n")
+			logger.PrintLog(err.Error())
+			logger.PrintLog("User ID: %v | Uid: %v | Name: %v\n",players[idx].DSUid,players[idx].Uid, players[idx].Name)
+			logger.PrintLog("****************************************************************\n")
 		}else{
-			log.Printf("User: %v, renamed to: %v | IDX: %d/%d", players[idx].DSUid, players[idx].Name, idx, len(players) - 1)
+			logger.PrintLog("User: %v, renamed to: %v | IDX: %d/%d", players[idx].DSUid, players[idx].Name, idx, len(players) - 1)
 		}
 	}
-	log.Printf("Renaming is done")
+	logger.PrintLog("Renaming is done")
 }
 
 func SendMessage(s *discordgo.Session, msg string) {
@@ -43,9 +45,12 @@ func SendMessage(s *discordgo.Session, msg string) {
 }
 
 func GetHim(s *discordgo.Session, i *discordgo.InteractionCreate) {
-	pid := i.ApplicationCommandData().Options[0].UserValue(nil).ID
-	log.Println(i.Interaction.Member.User.ID)
+	user := i.ApplicationCommandData().Options[0].UserValue(nil)
+	pid := user.ID
+	sender := i.Interaction.Member.User
+	logger.PrintLog("User %v#%v want get information about %v",sender.Username, sender.Discriminator, pid)
 	if !IsDiscordAdmin(s, i.Interaction.Member.User.ID) {
+		logger.PrintLog("User %v#%v dont have access to /gethim",sender.Username, sender.Discriminator)
 		s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 			Type: discordgo.InteractionResponseChannelMessageWithSource,
 			Data: &discordgo.InteractionResponseData{
@@ -55,6 +60,13 @@ func GetHim(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		})
 		return
 	}
+	data, found := bd.GetPlayer(pid)
+	if found {
+		logger.PrintLog("User %v found!",pid)
+	}else{
+		logger.PrintLog(data)
+	}
+
 	s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 		Type: discordgo.InteractionResponseChannelMessageWithSource,
 		Data: &discordgo.InteractionResponseData{
@@ -62,7 +74,7 @@ func GetHim(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			// This flag just allows you to create messages visible only for the caller of the command
 			// (user who triggered the command)
 			Flags:   1 << 6,
-			Content: bd.GetPlayer(pid),
+			Content: data,
 		},
 	})
 }

@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"ft-bot/config"
+	"ft-bot/logger"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
@@ -16,6 +17,7 @@ var (
 	GuildID        = flag.String("guild", config.GuildId, "Test guild ID. If not passed - bot registers commands globally")
 	BotToken       = flag.String("token", config.Token, "Bot access token")
 	RemoveCommands = flag.Bool("rmcmd", true, "Remove all commands after shutdowning or not")
+	Lg *log.Logger
 )
 
 var s *discordgo.Session
@@ -41,17 +43,17 @@ func Start() {
 	s.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		if h, ok := commandHandlers[i.ApplicationCommandData().Name]; ok {
 			h(s, i)
-			log.Printf("Command %v called\n", i.ApplicationCommandData().Name)
+			logger.PrintLog("Command %v called\n", i.ApplicationCommandData().Name)
 		}
 	})
 
 	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
-		log.Println("Bot is up!")
+		logger.PrintLog("Bot is up!")
 	})
 
 	err = s.Open()
 	if err != nil {
-		log.Fatalf("Cannot open the session: %v", err)
+		logger.PrintLog("Cannot open the session: %v", err)
 		return
 	}
 	defer s.Close()
@@ -60,16 +62,18 @@ func Start() {
 
 		_, err := s.ApplicationCommandCreate(s.State.User.ID, *GuildID, v)
 		if err != nil {
-			log.Panicf("Cannot create '%v' command: %v", v.Name, err)
+			logger.PrintLog("Cannot create '%v' command: %v", v.Name, err)
 		}
-		log.Printf("Command %v created", v.Name)
+		logger.PrintLog("Command %v created", v.Name)
 	}
 
-	log.Println("Start goroutine")
+
+
+	logger.PrintLog("Start goroutine")
 	stop := make(chan os.Signal)
 	signal.Notify(stop, os.Interrupt)
 	<-stop
-	log.Println("Gracefully shutdown")
+	logger.PrintLog("Gracefully shutdown\n************************************************************************\n\n")
 }
 
 func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
@@ -80,7 +84,7 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 
 		if !IsDiscordAdmin(s, m.Author.ID ) {
-			log.Printf("%v попытался использовать!\n", m.Author)
+			logger.PrintLog("%v попытался использовать!\n", m.Author)
 			return
 		}
 
