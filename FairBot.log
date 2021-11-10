@@ -1,0 +1,1007 @@
+2021/11/10 13:02:41 Logger started
+2021/11/10 13:02:41 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 13:02:42 Bot is up!
+2021/11/10 13:02:42 Command help created
+2021/11/10 13:02:43 Command gethim created
+2021/11/10 13:02:43 Start goroutines
+2021/11/10 13:12:22 Gracefully shutdown
+************************************************************************
+
+2021/11/10 13:12:27 Logger started
+2021/11/10 13:12:27 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 13:12:28 Bot is up!
+2021/11/10 13:12:28 Command help created
+2021/11/10 13:12:28 Command gethim created
+2021/11/10 13:12:28 Start goroutines
+2021/11/10 15:07:33 Gracefully shutdown
+************************************************************************
+
+2021/11/10 17:11:20 Logger started
+2021/11/10 17:11:20 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 17:11:21 Bot is up!
+2021/11/10 17:11:21 Command help created
+2021/11/10 17:11:22 Cannot create 'deleteUndefinedUsers' command: HTTP 400 Bad Request, {"code": 50035, "errors": {"name": {"_errors": [{"code": "APPLICATION_COMMAND_INVALID_NAME", "message": "Command name is invalid"}]}}, "message": "Invalid Form Body"}
+2021/11/10 17:11:22 Command deleteUndefinedUsers created
+2021/11/10 17:11:22 Cannot create 'reRole' command: HTTP 400 Bad Request, {"code": 50035, "errors": {"name": {"_errors": [{"code": "APPLICATION_COMMAND_INVALID_NAME", "message": "Command name is invalid"}]}}, "message": "Invalid Form Body"}
+2021/11/10 17:11:22 Command reRole created
+2021/11/10 17:11:22 Cannot create 'getHim' command: HTTP 400 Bad Request, {"code": 50035, "errors": {"name": {"_errors": [{"code": "APPLICATION_COMMAND_INVALID_NAME", "message": "Command name is invalid"}]}}, "message": "Invalid Form Body"}
+2021/11/10 17:11:22 Command getHim created
+2021/11/10 17:11:22 Start goroutines
+2021/11/10 17:12:35 Gracefully shutdown
+************************************************************************
+
+2021/11/10 17:12:40 Logger started
+2021/11/10 17:12:40 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 17:12:41 Bot is up!
+2021/11/10 17:12:41 Command help created
+2021/11/10 17:12:42 Command delete-undefined-users created
+2021/11/10 17:12:42 Command re-role created
+2021/11/10 17:12:42 Command get-him created
+2021/11/10 17:12:42 Start goroutines
+2021/11/10 17:15:45 Command help called
+2021/11/10 17:16:16 Command help called
+2021/11/10 17:16:32 Command re-role called
+2021/11/10 17:17:35 Command delete-undefined-users called
+2021/11/10 17:25:17 Gracefully shutdown
+************************************************************************
+
+2021/11/10 17:25:22 Logger started
+2021/11/10 17:25:22 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 17:25:23 Bot is up!
+2021/11/10 17:25:23 Command help created
+2021/11/10 17:25:24 Command delete-undefined-users created
+2021/11/10 17:25:24 Command re-role created
+2021/11/10 17:25:24 Command get-him created
+2021/11/10 17:25:24 Start goroutines
+2021/11/10 17:25:51 Command help called
+2021/11/10 17:25:54 Command re-role called
+2021/11/10 17:26:01 Command delete-undefined-users called
+2021/11/10 17:27:33 User FairyTale#5571 want get information about 258170131165741056
+2021/11/10 17:27:33 User 258170131165741056 found!
+2021/11/10 17:27:33 Command get-him called
+2021/11/10 17:27:42 Gracefully shutdown
+************************************************************************
+
+2021/11/10 17:27:46 Logger started
+2021/11/10 17:27:46 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 17:27:47 Bot is up!
+2021/11/10 17:27:48 Command help created
+2021/11/10 17:27:48 Command delete-undefined-users created
+2021/11/10 17:27:48 Command re-role created
+2021/11/10 17:27:48 Command get-him created
+2021/11/10 17:27:48 Start goroutines
+2021/11/10 17:40:24 Gracefully shutdown
+************************************************************************
+
+2021/11/10 17:40:27 Logger started
+2021/11/10 17:40:28 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 17:40:28 Bot is up!
+2021/11/10 17:40:28 Init commands...
+2021/11/10 17:40:50 Command help created
+2021/11/10 17:40:50 Command delete-undefined-users created
+2021/11/10 17:40:51 Command re-role created
+2021/11/10 17:40:51 Command get-him created
+2021/11/10 17:40:51 Init commands finished
+2021/11/10 17:40:51 Start goroutines
+2021/11/10 17:41:04 Gracefully shutdown
+************************************************************************
+
+2021/11/10 17:41:08 Logger started
+2021/11/10 17:41:08 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 17:41:09 Bot is up!
+2021/11/10 17:41:09 Init commands...
+2021/11/10 17:41:10 Command help deleted
+2021/11/10 17:41:10 Command delete-undefined-users deleted
+2021/11/10 17:41:10 Command re-role deleted
+2021/11/10 17:41:10 Command get-him deleted
+2021/11/10 17:41:10 Command help created
+2021/11/10 17:41:11 Command delete-undefined-users created
+2021/11/10 17:41:11 Command re-role created
+2021/11/10 17:41:12 Command get-him created
+2021/11/10 17:41:12 Init commands finished
+2021/11/10 17:41:12 Start goroutines
+2021/11/10 17:42:09 User FairyTale#5571 want get information about 258170131165741056
+2021/11/10 17:42:10 User 258170131165741056 found!
+2021/11/10 17:42:10 Command get-him called
+2021/11/10 17:42:16 Command re-role called
+2021/11/10 17:42:37 Command delete-undefined-users called
+2021/11/10 17:46:18 User FairyTale#5571 want get information about 258170131165741056
+2021/11/10 17:46:19 User 258170131165741056 found!
+2021/11/10 17:46:19 Command get-him called
+2021/11/10 17:46:28 User FairyTale#5571 want get information about 143077986936160256
+2021/11/10 17:46:29 User 143077986936160256 found!
+2021/11/10 17:46:29 Command get-him called
+2021/11/10 17:46:40 User FairyTale#5571 want get information about 301367353499844609
+2021/11/10 17:46:41 User 301367353499844609 found!
+2021/11/10 17:46:41 Command get-him called
+2021/11/10 17:49:29 Gracefully shutdown
+************************************************************************
+
+2021/11/10 17:49:42 Logger started
+2021/11/10 17:49:42 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 17:49:43 Init commands...
+2021/11/10 17:49:43 Bot is up!
+2021/11/10 17:49:43 Command help deleted
+2021/11/10 17:49:44 Command delete-undefined-users deleted
+2021/11/10 17:49:44 Command re-role deleted
+2021/11/10 17:49:44 Command get-him deleted
+2021/11/10 17:49:44 Command help created
+2021/11/10 17:49:45 Command delete-undefined-users created
+2021/11/10 17:49:45 Command re-role created
+2021/11/10 17:49:45 Command get-him created
+2021/11/10 17:49:45 Init commands finished
+2021/11/10 17:49:45 Start goroutines
+2021/11/10 17:49:53 Get all discord uids
+2021/11/10 17:49:54 Delete discord users
+2021/11/10 17:49:54 Delete discord users
+2021/11/10 17:49:55 Delete discord users
+2021/11/10 17:49:58 Delete discord users
+2021/11/10 17:50:02 Delete discord users
+2021/11/10 17:50:04 Delete discord users
+2021/11/10 17:50:06 Delete discord users
+2021/11/10 17:50:06 Delete discord users
+2021/11/10 17:50:07 Delete discord users
+2021/11/10 17:50:07 Delete discord users
+2021/11/10 17:50:08 Delete discord users
+2021/11/10 17:50:10 Delete discord users
+2021/11/10 17:50:11 Delete discord users
+2021/11/10 17:50:14 Delete discord users
+2021/11/10 17:50:16 Delete discord users
+2021/11/10 17:50:16 Delete discord users
+2021/11/10 17:50:18 Delete discord users
+2021/11/10 17:50:20 Delete discord users
+2021/11/10 17:50:21 Delete discord users
+2021/11/10 17:50:23 Delete discord users
+2021/11/10 17:50:28 Delete discord users
+2021/11/10 17:50:31 Delete discord users
+2021/11/10 17:50:33 Delete discord users
+2021/11/10 17:50:34 Delete discord users
+2021/11/10 17:50:37 Delete discord users
+2021/11/10 17:50:39 Delete discord users
+2021/11/10 17:50:40 Delete discord users
+2021/11/10 17:50:44 Delete discord users
+2021/11/10 17:50:44 Delete discord users
+2021/11/10 17:50:45 Delete discord users
+2021/11/10 17:50:47 Delete discord users
+2021/11/10 17:50:47 Delete discord users
+2021/11/10 17:50:48 Delete discord users
+2021/11/10 17:50:49 Delete discord users
+2021/11/10 17:50:51 Delete discord users
+2021/11/10 17:50:53 Delete discord users
+2021/11/10 17:50:55 Delete discord users
+2021/11/10 17:50:56 Delete discord users
+2021/11/10 17:50:57 Delete discord users
+2021/11/10 17:50:58 Delete discord users
+2021/11/10 17:50:58 Delete discord users
+2021/11/10 17:50:58 Delete discord users
+2021/11/10 17:51:01 Delete discord users
+2021/11/10 17:51:02 Delete discord users
+2021/11/10 17:51:03 Delete discord users
+2021/11/10 17:51:04 Delete discord users
+2021/11/10 17:51:04 Delete discord users
+2021/11/10 17:51:05 Delete discord users
+2021/11/10 17:51:06 Delete discord users
+2021/11/10 17:51:09 Delete discord users
+2021/11/10 17:51:13 Delete discord users
+2021/11/10 17:51:18 Delete discord users
+2021/11/10 17:51:18 Delete discord users
+2021/11/10 17:51:19 Delete discord users
+2021/11/10 17:51:19 Delete discord users
+2021/11/10 17:51:21 Delete discord users
+2021/11/10 17:51:22 Delete discord users
+2021/11/10 17:51:23 Delete discord users
+2021/11/10 17:51:29 Delete discord users
+2021/11/10 17:51:34 Delete discord users
+2021/11/10 17:51:35 Delete discord users
+2021/11/10 17:51:38 Delete discord users
+2021/11/10 17:51:38 Delete discord users
+2021/11/10 17:51:40 Delete discord users
+2021/11/10 17:51:40 Delete discord users
+2021/11/10 17:51:41 Delete discord users
+2021/11/10 17:51:41 Delete discord users
+2021/11/10 17:51:42 Delete discord users
+2021/11/10 17:51:43 Delete discord users
+2021/11/10 17:51:44 Delete discord users
+2021/11/10 17:51:47 Delete discord users
+2021/11/10 17:51:52 Delete discord users
+2021/11/10 17:51:56 Delete discord users
+2021/11/10 17:51:57 Delete discord users
+2021/11/10 17:51:58 Delete discord users
+2021/11/10 17:52:00 Delete discord users
+2021/11/10 17:52:01 Delete discord users
+2021/11/10 18:06:32 User FairyTale#5571 want get information about 258170131165741056
+2021/11/10 18:06:32 Get player
+2021/11/10 18:06:32 User 258170131165741056 found!
+2021/11/10 18:06:33 Command get-him called
+2021/11/10 18:06:53 Gracefully shutdown
+************************************************************************
+
+2021/11/10 18:06:58 Logger started
+2021/11/10 18:06:58 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 18:06:59 Bot is up!
+2021/11/10 18:06:59 Init commands...
+2021/11/10 18:06:59 Command help deleted
+2021/11/10 18:06:59 Command delete-undefined-users deleted
+2021/11/10 18:06:59 Command re-role deleted
+2021/11/10 18:07:00 Command get-him deleted
+2021/11/10 18:07:00 Command help created
+2021/11/10 18:07:00 Command delete-undefined-users created
+2021/11/10 18:07:00 Command re-role created
+2021/11/10 18:07:01 Command get-him created
+2021/11/10 18:07:01 Init commands finished
+2021/11/10 18:07:01 Start goroutines
+2021/11/10 18:07:12 Get all discord uids
+2021/11/10 18:11:38 User FairyTale#5571 want get information about 238028080172630016
+2021/11/10 18:11:38 Get player
+2021/11/10 18:11:39 User 238028080172630016 found!
+2021/11/10 18:11:39 Command get-him called
+2021/11/10 18:11:47 Get stat players
+2021/11/10 18:11:47 Get all registered players
+2021/11/10 18:11:47 reRole called
+2021/11/10 18:11:47 Command re-role called
+2021/11/10 18:12:03 Get all discord uids
+2021/11/10 18:12:43 Gracefully shutdown
+************************************************************************
+
+2021/11/10 18:13:41 Logger started
+2021/11/10 18:13:42 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 18:13:42 Bot is up!
+2021/11/10 18:13:42 Init commands...
+2021/11/10 18:13:43 Command help deleted
+2021/11/10 18:13:43 Command delete-undefined-users deleted
+2021/11/10 18:13:43 Command re-role deleted
+2021/11/10 18:13:44 Command get-him deleted
+2021/11/10 18:13:44 Command help created
+2021/11/10 18:13:44 Command delete-undefined-users created
+2021/11/10 18:13:44 Command re-role created
+2021/11/10 18:13:44 Command get-him created
+2021/11/10 18:13:44 Init commands finished
+2021/11/10 18:13:44 Start goroutines
+2021/11/10 18:15:44 Gracefully shutdown
+************************************************************************
+
+2021/11/10 18:15:48 Logger started
+2021/11/10 18:15:48 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 18:15:49 Bot is up!
+2021/11/10 18:15:49 Init commands...
+2021/11/10 18:15:49 Command help deleted
+2021/11/10 18:15:49 Command delete-undefined-users deleted
+2021/11/10 18:15:50 Command re-role deleted
+2021/11/10 18:15:50 Command get-him deleted
+2021/11/10 18:15:50 Command help created
+2021/11/10 18:15:50 Command delete-undefined-users created
+2021/11/10 18:15:51 Command re-role created
+2021/11/10 18:15:51 Command get-him created
+2021/11/10 18:15:51 Init commands finished
+2021/11/10 18:15:51 Start goroutines
+2021/11/10 18:16:47 Command help called
+2021/11/10 18:16:54 User FairyTale#5571 want get information about 258170131165741056
+2021/11/10 18:16:55 Get player
+2021/11/10 18:16:55 User 258170131165741056 found!
+2021/11/10 18:16:55 Command get-him called
+2021/11/10 18:16:59 Get stat players
+2021/11/10 18:16:59 Get all registered players
+2021/11/10 18:16:59 sql: Scan called without calling Next
+2021/11/10 18:17:00 sql: Scan called without calling Next
+2021/11/10 18:17:00 sql: Scan called without calling Next
+2021/11/10 18:17:00 sql: Scan called without calling Next
+2021/11/10 18:17:00 sql: Scan called without calling Next
+2021/11/10 18:17:00 sql: Scan called without calling Next
+2021/11/10 18:17:01 sql: Scan called without calling Next
+2021/11/10 18:17:01 sql: Scan called without calling Next
+2021/11/10 18:17:01 sql: Scan called without calling Next
+2021/11/10 18:17:01 sql: Scan called without calling Next
+2021/11/10 18:17:01 sql: Scan called without calling Next
+2021/11/10 18:17:02 sql: Scan called without calling Next
+2021/11/10 18:17:02 sql: Scan called without calling Next
+2021/11/10 18:17:02 sql: Scan called without calling Next
+2021/11/10 18:17:02 sql: Scan called without calling Next
+2021/11/10 18:17:02 sql: Scan called without calling Next
+2021/11/10 18:17:03 sql: Scan called without calling Next
+2021/11/10 18:17:03 sql: Scan called without calling Next
+2021/11/10 18:17:03 sql: Scan called without calling Next
+2021/11/10 18:17:03 sql: Scan called without calling Next
+2021/11/10 18:17:03 sql: Scan called without calling Next
+2021/11/10 18:17:04 sql: Scan called without calling Next
+2021/11/10 18:17:04 sql: Scan called without calling Next
+2021/11/10 18:17:04 sql: Scan called without calling Next
+2021/11/10 18:17:04 sql: Scan called without calling Next
+2021/11/10 18:17:04 sql: Scan called without calling Next
+2021/11/10 18:17:05 sql: Scan called without calling Next
+2021/11/10 18:17:05 sql: Scan called without calling Next
+2021/11/10 18:17:05 sql: Scan called without calling Next
+2021/11/10 18:17:05 sql: Scan called without calling Next
+2021/11/10 18:17:05 sql: Scan called without calling Next
+2021/11/10 18:17:06 sql: Scan called without calling Next
+2021/11/10 18:17:06 sql: Scan called without calling Next
+2021/11/10 18:17:06 sql: Scan called without calling Next
+2021/11/10 18:17:06 sql: Scan called without calling Next
+2021/11/10 18:17:06 sql: Scan called without calling Next
+2021/11/10 18:17:07 sql: Scan called without calling Next
+2021/11/10 18:17:07 sql: Scan called without calling Next
+2021/11/10 18:17:07 sql: Scan called without calling Next
+2021/11/10 18:17:07 sql: Scan called without calling Next
+2021/11/10 18:17:07 sql: Scan called without calling Next
+2021/11/10 18:17:07 sql: Scan called without calling Next
+2021/11/10 18:17:08 sql: Scan called without calling Next
+2021/11/10 18:17:08 sql: Scan called without calling Next
+2021/11/10 18:17:08 sql: Scan called without calling Next
+2021/11/10 18:17:08 sql: Scan called without calling Next
+2021/11/10 18:17:09 sql: Scan called without calling Next
+2021/11/10 18:17:09 sql: Scan called without calling Next
+2021/11/10 18:17:09 sql: Scan called without calling Next
+2021/11/10 18:17:09 sql: Scan called without calling Next
+2021/11/10 18:17:09 sql: Scan called without calling Next
+2021/11/10 18:17:10 sql: Scan called without calling Next
+2021/11/10 18:17:10 sql: Scan called without calling Next
+2021/11/10 18:17:10 sql: Scan called without calling Next
+2021/11/10 18:17:10 sql: Scan called without calling Next
+2021/11/10 18:17:10 Gracefully shutdown
+************************************************************************
+
+2021/11/10 18:17:10 sql: Scan called without calling Next
+2021/11/10 18:17:11 sql: Scan called without calling Next
+2021/11/10 18:17:11 sql: Scan called without calling Next
+2021/11/10 18:17:11 sql: Scan called without calling Next
+2021/11/10 18:17:11 sql: Scan called without calling Next
+2021/11/10 18:20:22 Logger started
+2021/11/10 18:20:22 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 18:20:23 Init commands...
+2021/11/10 18:20:23 Bot is up!
+2021/11/10 18:20:23 Command help deleted
+2021/11/10 18:20:24 Command delete-undefined-users deleted
+2021/11/10 18:20:24 Command re-role deleted
+2021/11/10 18:20:24 Command get-him deleted
+2021/11/10 18:20:24 Command help created
+2021/11/10 18:20:24 Command delete-undefined-users created
+2021/11/10 18:20:25 Command re-role created
+2021/11/10 18:20:25 Command get-him created
+2021/11/10 18:20:25 Init commands finished
+2021/11/10 18:20:25 Start goroutines
+2021/11/10 18:20:27 Get stat players
+2021/11/10 18:20:27 Get all registered players
+2021/11/10 18:20:27 sql: Scan called without calling Next
+2021/11/10 18:20:27 sql: Scan called without calling Next
+2021/11/10 18:20:28 sql: Scan called without calling Next
+2021/11/10 18:20:28 sql: Scan called without calling Next
+2021/11/10 18:20:28 sql: Scan called without calling Next
+2021/11/10 18:20:28 sql: Scan called without calling Next
+2021/11/10 18:20:29 sql: Scan called without calling Next
+2021/11/10 18:20:29 sql: Scan called without calling Next
+2021/11/10 18:20:30 sql: Scan called without calling Next
+2021/11/10 18:20:31 sql: Scan called without calling Next
+2021/11/10 18:20:31 Gracefully shutdown
+************************************************************************
+
+2021/11/10 18:20:31 sql: Scan called without calling Next
+2021/11/10 18:20:32 sql: Scan called without calling Next
+2021/11/10 18:20:32 sql: Scan called without calling Next
+2021/11/10 18:20:32 sql: Scan called without calling Next
+2021/11/10 18:21:26 Logger started
+2021/11/10 18:21:26 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 18:21:27 Init commands...
+2021/11/10 18:21:27 Bot is up!
+2021/11/10 18:21:27 Command help deleted
+2021/11/10 18:21:27 Command delete-undefined-users deleted
+2021/11/10 18:21:28 Command re-role deleted
+2021/11/10 18:21:28 Command get-him deleted
+2021/11/10 18:21:28 Command help created
+2021/11/10 18:21:28 Command delete-undefined-users created
+2021/11/10 18:21:28 Command re-role created
+2021/11/10 18:21:29 Command get-him created
+2021/11/10 18:21:29 Init commands finished
+2021/11/10 18:21:29 Start goroutines
+2021/11/10 18:21:30 Get stat players
+2021/11/10 18:21:30 Get all registered players
+2021/11/10 18:21:30 sql: Scan called without calling Next
+2021/11/10 18:21:31 sql: Scan called without calling Next
+2021/11/10 18:21:31 sql: Scan called without calling Next
+2021/11/10 18:21:31 sql: Scan called without calling Next
+2021/11/10 18:21:31 sql: Scan called without calling Next
+2021/11/10 18:21:31 sql: Scan called without calling Next
+2021/11/10 18:21:32 sql: Scan called without calling Next
+2021/11/10 18:21:32 sql: Scan called without calling Next
+2021/11/10 18:21:32 sql: Scan called without calling Next
+2021/11/10 18:21:32 sql: Scan called without calling Next
+2021/11/10 18:21:32 sql: Scan called without calling Next
+2021/11/10 18:21:33 sql: Scan called without calling Next
+2021/11/10 18:21:33 sql: Scan called without calling Next
+2021/11/10 18:21:33 sql: Scan called without calling Next
+2021/11/10 18:21:33 sql: Scan called without calling Next
+2021/11/10 18:21:33 sql: Scan called without calling Next
+2021/11/10 18:21:34 sql: Scan called without calling Next
+2021/11/10 18:21:34 sql: Scan called without calling Next
+2021/11/10 18:21:34 sql: Scan called without calling Next
+2021/11/10 18:21:34 sql: Scan called without calling Next
+2021/11/10 18:21:34 sql: Scan called without calling Next
+2021/11/10 18:21:34 sql: Scan called without calling Next
+2021/11/10 18:21:35 sql: Scan called without calling Next
+2021/11/10 18:21:35 sql: Scan called without calling Next
+2021/11/10 18:21:35 sql: Scan called without calling Next
+2021/11/10 18:21:35 sql: Scan called without calling Next
+2021/11/10 18:21:35 sql: Scan called without calling Next
+2021/11/10 18:21:36 sql: Scan called without calling Next
+2021/11/10 18:21:36 sql: Scan called without calling Next
+2021/11/10 18:21:36 sql: Scan called without calling Next
+2021/11/10 18:21:36 sql: Scan called without calling Next
+2021/11/10 18:21:36 sql: Scan called without calling Next
+2021/11/10 18:21:37 sql: Scan called without calling Next
+2021/11/10 18:21:37 sql: Scan called without calling Next
+2021/11/10 18:21:37 sql: Scan called without calling Next
+2021/11/10 18:21:37 sql: Scan called without calling Next
+2021/11/10 18:21:37 sql: Scan called without calling Next
+2021/11/10 18:21:38 sql: Scan called without calling Next
+2021/11/10 18:21:38 sql: Scan called without calling Next
+2021/11/10 18:21:38 sql: Scan called without calling Next
+2021/11/10 18:21:38 sql: Scan called without calling Next
+2021/11/10 18:21:38 sql: Scan called without calling Next
+2021/11/10 18:21:39 sql: Scan called without calling Next
+2021/11/10 18:21:39 sql: Scan called without calling Next
+2021/11/10 18:21:39 sql: Scan called without calling Next
+2021/11/10 18:21:39 sql: Scan called without calling Next
+2021/11/10 18:21:39 Gracefully shutdown
+************************************************************************
+
+2021/11/10 18:21:39 sql: Scan called without calling Next
+2021/11/10 18:21:40 sql: Scan called without calling Next
+2021/11/10 18:21:40 sql: Scan called without calling Next
+2021/11/10 18:21:40 sql: Scan called without calling Next
+2021/11/10 18:21:40 sql: Scan called without calling Next
+2021/11/10 18:22:10 Logger started
+2021/11/10 18:22:10 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 18:22:11 Init commands...
+2021/11/10 18:22:11 Bot is up!
+2021/11/10 18:22:11 Command help deleted
+2021/11/10 18:22:11 Command delete-undefined-users deleted
+2021/11/10 18:22:11 Command re-role deleted
+2021/11/10 18:22:12 Command get-him deleted
+2021/11/10 18:22:12 Command help created
+2021/11/10 18:22:12 Command delete-undefined-users created
+2021/11/10 18:22:12 Command re-role created
+2021/11/10 18:22:13 Command get-him created
+2021/11/10 18:22:13 Init commands finished
+2021/11/10 18:22:13 Start goroutines
+2021/11/10 18:22:14 Get stat players
+2021/11/10 18:22:14 Get all registered players
+2021/11/10 18:22:14 sql: Scan called without calling Next
+2021/11/10 18:22:14 sql: Scan called without calling Next
+2021/11/10 18:22:15 sql: Scan called without calling Next
+2021/11/10 18:22:15 sql: Scan called without calling Next
+2021/11/10 18:22:15 sql: Scan called without calling Next
+2021/11/10 18:22:15 sql: Scan called without calling Next
+2021/11/10 18:22:15 sql: Scan called without calling Next
+2021/11/10 18:22:15 sql: Scan called without calling Next
+2021/11/10 18:22:16 sql: Scan called without calling Next
+2021/11/10 18:22:16 sql: Scan called without calling Next
+2021/11/10 18:22:16 sql: Scan called without calling Next
+2021/11/10 18:22:16 sql: Scan called without calling Next
+2021/11/10 18:22:16 sql: Scan called without calling Next
+2021/11/10 18:22:17 sql: Scan called without calling Next
+2021/11/10 18:22:17 sql: Scan called without calling Next
+2021/11/10 18:22:17 sql: Scan called without calling Next
+2021/11/10 18:22:17 sql: Scan called without calling Next
+2021/11/10 18:22:17 sql: Scan called without calling Next
+2021/11/10 18:22:18 sql: Scan called without calling Next
+2021/11/10 18:22:18 sql: Scan called without calling Next
+2021/11/10 18:22:18 sql: Scan called without calling Next
+2021/11/10 18:22:18 sql: Scan called without calling Next
+2021/11/10 18:22:18 sql: Scan called without calling Next
+2021/11/10 18:22:19 sql: Scan called without calling Next
+2021/11/10 18:22:19 sql: Scan called without calling Next
+2021/11/10 18:22:19 sql: Scan called without calling Next
+2021/11/10 18:22:19 sql: Scan called without calling Next
+2021/11/10 18:22:19 sql: Scan called without calling Next
+2021/11/10 18:22:20 sql: Scan called without calling Next
+2021/11/10 18:22:20 sql: Scan called without calling Next
+2021/11/10 18:22:20 sql: Scan called without calling Next
+2021/11/10 18:22:20 sql: Scan called without calling Next
+2021/11/10 18:22:20 sql: Scan called without calling Next
+2021/11/10 18:22:21 sql: Scan called without calling Next
+2021/11/10 18:22:21 sql: Scan called without calling Next
+2021/11/10 18:22:21 sql: Scan called without calling Next
+2021/11/10 18:22:21 sql: Scan called without calling Next
+2021/11/10 18:22:21 sql: Scan called without calling Next
+2021/11/10 18:22:21 sql: Scan called without calling Next
+2021/11/10 18:22:22 sql: Scan called without calling Next
+2021/11/10 18:22:22 commands out of sync. Did you run multiple statements at once?
+2021/11/10 18:25:52 Logger started
+2021/11/10 18:25:52 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 18:25:53 Bot is up!
+2021/11/10 18:25:53 Init commands...
+2021/11/10 18:25:53 Command help deleted
+2021/11/10 18:25:54 Command delete-undefined-users deleted
+2021/11/10 18:25:54 Command re-role deleted
+2021/11/10 18:25:54 Command get-him deleted
+2021/11/10 18:25:54 Command help created
+2021/11/10 18:25:54 Command delete-undefined-users created
+2021/11/10 18:25:55 Command re-role created
+2021/11/10 18:25:55 Command get-him created
+2021/11/10 18:25:55 Init commands finished
+2021/11/10 18:25:55 Start goroutines
+2021/11/10 18:25:58 Get stat players
+2021/11/10 18:25:58 Get all registered players
+2021/11/10 18:25:58 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:25:58 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:25:59 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:25:59 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:25:59 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:25:59 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:25:59 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:00 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:00 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:00 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:00 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:00 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:01 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:01 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:01 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:01 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:01 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:02 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:02 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:02 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:02 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:02 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:02 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:03 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:03 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:03 GetStats Error: sql: Scan called without calling Next
+2021/11/10 18:26:03 GetStats Error: commands out of sync. Did you run multiple statements at once?
+2021/11/10 18:26:49 Logger started
+2021/11/10 18:26:49 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 18:26:50 Init commands...
+2021/11/10 18:26:50 Bot is up!
+2021/11/10 18:26:50 Command help deleted
+2021/11/10 18:26:50 Command delete-undefined-users deleted
+2021/11/10 18:26:51 Command re-role deleted
+2021/11/10 18:26:51 Command get-him deleted
+2021/11/10 18:26:51 Command help created
+2021/11/10 18:26:51 Command delete-undefined-users created
+2021/11/10 18:26:51 Command re-role created
+2021/11/10 18:26:52 Command get-him created
+2021/11/10 18:26:52 Init commands finished
+2021/11/10 18:26:52 Start goroutines
+2021/11/10 18:26:52 Get stat players
+2021/11/10 18:26:52 Get all registered players
+2021/11/10 18:27:30 Get group roles
+2021/11/10 18:27:30 Is leader
+2021/11/10 18:27:30 IsLeader Error: sql: Scan called without calling Next
+2021/11/10 18:27:31 User 76561198055124016 added member role FOR GroupId 2
+2021/11/10 18:27:31 Give user Jack Byvyson | 76561198090549826 VIP Role
+2021/11/10 18:27:31 Get group roles
+2021/11/10 18:27:31 Is leader
+2021/11/10 18:27:31 IsLeader Error: sql: Scan called without calling Next
+2021/11/10 18:27:31 User 76561198090549826 added member role FOR GroupId 1
+2021/11/10 18:27:31 Get all group roles
+2021/11/10 18:27:32 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:27:32 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:27:32 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:27:41 Get group roles
+2021/11/10 18:27:42 Is leader
+2021/11/10 18:27:42 IsLeader Error: sql: Scan called without calling Next
+2021/11/10 18:27:42 User 76561198188797329 added member role FOR GroupId 23
+2021/11/10 18:27:42 Give user Amir Rustamovich | 76561198965376624 VIP Role
+2021/11/10 18:27:42 Get group roles
+2021/11/10 18:27:42 Is leader
+2021/11/10 18:27:42 IsLeader Error: sql: Scan called without calling Next
+2021/11/10 18:27:43 User 76561198965376624 added member role FOR GroupId 1
+2021/11/10 18:27:43 Get all group roles
+2021/11/10 18:27:43 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:27:43 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:27:43 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:27:53 Get all group roles
+2021/11/10 18:27:53 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:27:53 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:27:53 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:28:03 Get group roles
+2021/11/10 18:28:03 Is leader
+2021/11/10 18:28:03 IsLeader Error: sql: Scan called without calling Next
+2021/11/10 18:28:03 User 76561198122788982 added member role FOR GroupId 7
+2021/11/10 18:28:04 Get group roles
+2021/11/10 18:28:04 Is leader
+2021/11/10 18:28:04 IsLeader Error: sql: Scan called without calling Next
+2021/11/10 18:28:04 User 76561198296798181 added member role FOR GroupId 1
+2021/11/10 18:28:04 Get group roles
+2021/11/10 18:28:04 Is leader
+2021/11/10 18:28:04 IsLeader Error: sql: Scan called without calling Next
+2021/11/10 18:28:04 User 76561198157300994 added member role FOR GroupId 2
+2021/11/10 18:28:05 Give user Rudik Omarov | 76561198314820360 VIP Role
+2021/11/10 18:28:05 Get all group roles
+2021/11/10 18:28:05 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:28:05 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:28:05 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:28:15 Get group roles
+2021/11/10 18:28:15 Is leader
+2021/11/10 18:28:15 IsLeader Error: sql: Scan called without calling Next
+2021/11/10 18:28:16 User 76561198049056822 added member role FOR GroupId 23
+2021/11/10 18:28:16 Get all group roles
+2021/11/10 18:28:16 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:28:16 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:28:16 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:28:26 Give user Foma Krupin | 76561198168653130 VIP Role
+2021/11/10 18:28:26 Get group roles
+2021/11/10 18:28:26 GetGroup Error: sql: Scan error on column index 1, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:28:26 Is leader
+2021/11/10 18:28:26 IsLeader Error: sql: Scan called without calling Next
+2021/11/10 18:28:26 User 76561198168653130 added member role FOR GroupId 24
+2021/11/10 18:28:27 Get all group roles
+2021/11/10 18:28:27 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:28:27 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:28:27 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:28:37 Get group roles
+2021/11/10 18:28:37 Is leader
+2021/11/10 18:28:37 IsLeader Error: sql: Scan called without calling Next
+2021/11/10 18:28:37 User 76561198257233941 added member role FOR GroupId 12
+2021/11/10 18:28:37 Get group roles
+2021/11/10 18:28:37 Is leader
+2021/11/10 18:28:37 IsLeader Error: sql: Scan called without calling Next
+2021/11/10 18:28:37 User 76561198442242729 added member role FOR GroupId 10
+2021/11/10 18:28:38 Get group roles
+2021/11/10 18:28:38 Is leader
+2021/11/10 18:28:38 IsLeader Error: sql: Scan called without calling Next
+2021/11/10 18:28:38 User 76561198807233015 added member role FOR GroupId 1
+2021/11/10 18:28:38 Get group roles
+2021/11/10 18:28:38 Is leader
+2021/11/10 18:28:38 IsLeader Error: sql: Scan called without calling Next
+2021/11/10 18:28:39 User 76561198162478436 added member role FOR GroupId 17
+2021/11/10 18:28:39 Get all group roles
+2021/11/10 18:28:39 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:28:39 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:28:39 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:28:39 Gracefully shutdown
+************************************************************************
+
+2021/11/10 18:28:43 Logger started
+2021/11/10 18:28:43 Database version: 10.6.3-MariaDB-1:10.6.3+maria~stretch
+2021/11/10 18:28:44 Init commands...
+2021/11/10 18:28:44 Bot is up!
+2021/11/10 18:28:45 Command help deleted
+2021/11/10 18:28:45 Command delete-undefined-users deleted
+2021/11/10 18:28:45 Command re-role deleted
+2021/11/10 18:28:45 Command get-him deleted
+2021/11/10 18:28:45 Command help created
+2021/11/10 18:28:46 Command delete-undefined-users created
+2021/11/10 18:28:46 Command re-role created
+2021/11/10 18:28:46 Command get-him created
+2021/11/10 18:28:46 Init commands finished
+2021/11/10 18:28:46 Start goroutines
+2021/11/10 18:28:47 Get stat players
+2021/11/10 18:28:47 Get all registered players
+2021/11/10 18:29:24 Get group roles
+2021/11/10 18:29:25 Is leader
+2021/11/10 18:29:25 User 76561198055124016 added member role FOR GroupId 2
+2021/11/10 18:29:25 Get group roles
+2021/11/10 18:29:25 Is leader
+2021/11/10 18:29:25 User 76561198090549826 added member role FOR GroupId 1
+2021/11/10 18:29:26 Get all group roles
+2021/11/10 18:29:26 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:29:26 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:29:26 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:29:36 Get group roles
+2021/11/10 18:29:36 Is leader
+2021/11/10 18:29:36 User 76561198188797329 added leader role FOR GroupId 23
+2021/11/10 18:29:36 Get group roles
+2021/11/10 18:29:36 Is leader
+2021/11/10 18:29:36 User 76561198965376624 added member role FOR GroupId 1
+2021/11/10 18:29:37 Get all group roles
+2021/11/10 18:29:37 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:29:37 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:29:37 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:29:47 Get all group roles
+2021/11/10 18:29:47 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:29:47 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:29:47 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:29:57 Get group roles
+2021/11/10 18:29:57 Is leader
+2021/11/10 18:29:57 User 76561198122788982 added member role FOR GroupId 7
+2021/11/10 18:29:57 Get group roles
+2021/11/10 18:29:57 Is leader
+2021/11/10 18:29:58 User 76561198296798181 added member role FOR GroupId 1
+2021/11/10 18:29:58 Get group roles
+2021/11/10 18:29:58 Is leader
+2021/11/10 18:29:58 User 76561198157300994 added member role FOR GroupId 2
+2021/11/10 18:29:58 Get all group roles
+2021/11/10 18:29:58 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:29:58 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:29:58 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:08 Get group roles
+2021/11/10 18:30:08 Is leader
+2021/11/10 18:30:09 User 76561198049056822 added member role FOR GroupId 23
+2021/11/10 18:30:09 Get all group roles
+2021/11/10 18:30:09 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:09 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:09 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:19 Get group roles
+2021/11/10 18:30:19 GetGroup Error: sql: Scan error on column index 1, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:19 Is leader
+2021/11/10 18:30:19 User 76561198168653130 added member role FOR GroupId 24
+2021/11/10 18:30:19 Get all group roles
+2021/11/10 18:30:19 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:19 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:19 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:29 Get group roles
+2021/11/10 18:30:29 Is leader
+2021/11/10 18:30:30 User 76561198257233941 added member role FOR GroupId 12
+2021/11/10 18:30:30 Get group roles
+2021/11/10 18:30:30 Is leader
+2021/11/10 18:30:30 User 76561198442242729 added member role FOR GroupId 10
+2021/11/10 18:30:30 Get group roles
+2021/11/10 18:30:30 Is leader
+2021/11/10 18:30:31 User 76561198807233015 added member role FOR GroupId 1
+2021/11/10 18:30:31 Get group roles
+2021/11/10 18:30:31 Is leader
+2021/11/10 18:30:31 User 76561198162478436 added member role FOR GroupId 17
+2021/11/10 18:30:31 Get all group roles
+2021/11/10 18:30:32 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:32 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:32 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:42 Give user Evgenui Demin | 76561198302369767 VIP Role
+2021/11/10 18:30:42 Get group roles
+2021/11/10 18:30:42 Is leader
+2021/11/10 18:30:43 User 76561198302369767 added member role FOR GroupId 13
+2021/11/10 18:30:43 Get all group roles
+2021/11/10 18:30:43 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:43 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:43 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:53 Get group roles
+2021/11/10 18:30:53 Is leader
+2021/11/10 18:30:54 User 76561198035315304 added member role FOR GroupId 14
+2021/11/10 18:30:54 Get all group roles
+2021/11/10 18:30:54 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:54 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:30:54 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:04 Get group roles
+2021/11/10 18:31:04 Is leader
+2021/11/10 18:31:04 User 76561198258556220 added member role FOR GroupId 1
+2021/11/10 18:31:05 Give user Dia Renzo | 76561198164610413 VIP Role
+2021/11/10 18:31:05 Get group roles
+2021/11/10 18:31:05 Is leader
+2021/11/10 18:31:05 User 76561198164610413 added member role FOR GroupId 1
+2021/11/10 18:31:05 Get all group roles
+2021/11/10 18:31:05 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:05 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:05 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:15 Get group roles
+2021/11/10 18:31:15 Is leader
+2021/11/10 18:31:16 User 76561198844249041 added leader role FOR GroupId 3
+2021/11/10 18:31:16 Get group roles
+2021/11/10 18:31:16 Is leader
+2021/11/10 18:31:16 User 76561198079435973 added member role FOR GroupId 7
+2021/11/10 18:31:16 Get group roles
+2021/11/10 18:31:16 Is leader
+2021/11/10 18:31:17 User 76561198348651915 added member role FOR GroupId 20
+2021/11/10 18:31:17 Get all group roles
+2021/11/10 18:31:17 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:17 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:17 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:28 Give user Buffalo Bill | 76561198032200653 VIP Role
+2021/11/10 18:31:28 Get group roles
+2021/11/10 18:31:28 GetGroup Error: sql: Scan error on column index 1, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:28 Is leader
+2021/11/10 18:31:28 User 76561198032200653 added leader role FOR GroupId 24
+2021/11/10 18:31:28 Get all group roles
+2021/11/10 18:31:28 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:28 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:28 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:39 Give user Hikara Kawamoto | 76561198183214493 VIP Role
+2021/11/10 18:31:39 Get group roles
+2021/11/10 18:31:39 Is leader
+2021/11/10 18:31:39 User 76561198183214493 added member role FOR GroupId 1
+2021/11/10 18:31:40 Give user Dino Zerilli | 76561198008665518 VIP Role
+2021/11/10 18:31:40 Get group roles
+2021/11/10 18:31:40 Is leader
+2021/11/10 18:31:40 User 76561198008665518 added member role FOR GroupId 7
+2021/11/10 18:31:40 Give user Ralph Barger | 76561198144261492 VIP Role
+2021/11/10 18:31:40 Get group roles
+2021/11/10 18:31:40 GetGroup Error: sql: Scan error on column index 1, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:40 Is leader
+2021/11/10 18:31:41 User 76561198144261492 added member role FOR GroupId 24
+2021/11/10 18:31:41 Get group roles
+2021/11/10 18:31:41 Is leader
+2021/11/10 18:31:41 User 76561198335816608 added member role FOR GroupId 1
+2021/11/10 18:31:41 Get group roles
+2021/11/10 18:31:42 Is leader
+2021/11/10 18:31:42 User 76561198849670817 added member role FOR GroupId 20
+2021/11/10 18:31:42 Get all group roles
+2021/11/10 18:31:42 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:42 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:42 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:52 Get group roles
+2021/11/10 18:31:52 Is leader
+2021/11/10 18:31:52 User 76561199010373455 added member role FOR GroupId 1
+2021/11/10 18:31:53 Get group roles
+2021/11/10 18:31:53 Is leader
+2021/11/10 18:31:53 User 76561199010373455 added member role FOR GroupId 1
+2021/11/10 18:31:53 Get group roles
+2021/11/10 18:31:53 Is leader
+2021/11/10 18:31:54 User 76561199010373455 added member role FOR GroupId 1
+2021/11/10 18:31:54 Get group roles
+2021/11/10 18:31:54 Is leader
+2021/11/10 18:31:54 User 76561198131519300 added member role FOR GroupId 1
+2021/11/10 18:31:54 Get group roles
+2021/11/10 18:31:54 Is leader
+2021/11/10 18:31:55 User 76561198088688095 added member role FOR GroupId 1
+2021/11/10 18:31:55 Get group roles
+2021/11/10 18:31:55 Is leader
+2021/11/10 18:31:55 User 76561198850082007 added leader role FOR GroupId 2
+2021/11/10 18:31:55 Get all group roles
+2021/11/10 18:31:55 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:55 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:31:55 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:32:06 Give user Liv Boeree | 76561198830959338 VIP Role
+2021/11/10 18:32:06 Get group roles
+2021/11/10 18:32:06 Is leader
+2021/11/10 18:32:06 User 76561198830959338 added member role FOR GroupId 1
+2021/11/10 18:32:06 Get all group roles
+2021/11/10 18:32:06 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:32:06 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:32:06 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:32:16 Give user Tumyp Stepanov | 76561198060983312 VIP Role
+2021/11/10 18:32:16 Get group roles
+2021/11/10 18:32:16 Is leader
+2021/11/10 18:32:17 User 76561198060983312 added leader role FOR GroupId 6
+2021/11/10 18:32:17 Get group roles
+2021/11/10 18:32:17 Is leader
+2021/11/10 18:32:17 User 76561198859526459 added leader role FOR GroupId 10
+2021/11/10 18:32:17 Get group roles
+2021/11/10 18:32:17 Is leader
+2021/11/10 18:32:18 User 76561198127805660 added member role FOR GroupId 1
+2021/11/10 18:32:18 Get group roles
+2021/11/10 18:32:18 Is leader
+2021/11/10 18:32:18 User 76561198083917799 added member role FOR GroupId 3
+2021/11/10 18:32:19 Give user Volodya Yakovlev | 76561198340144771 VIP Role
+2021/11/10 18:32:19 Get group roles
+2021/11/10 18:32:19 Is leader
+2021/11/10 18:32:19 User 76561198340144771 added leader role FOR GroupId 1
+2021/11/10 18:32:19 Get group roles
+2021/11/10 18:32:19 Is leader
+2021/11/10 18:32:20 User 76561198264668467 added member role FOR GroupId 7
+2021/11/10 18:32:20 Get all group roles
+2021/11/10 18:32:20 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:32:20 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:32:20 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:32:30 Get all group roles
+2021/11/10 18:32:30 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:32:30 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:32:30 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:32:40 Get all group roles
+2021/11/10 18:32:40 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:32:40 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:32:40 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:32:51 Get group roles
+2021/11/10 18:32:51 Is leader
+2021/11/10 18:32:51 User 76561198057578062 added member role FOR GroupId 1
+2021/11/10 18:32:51 Get all group roles
+2021/11/10 18:32:51 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:32:51 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:32:51 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:01 Get all group roles
+2021/11/10 18:33:01 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:01 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:01 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:12 Get group roles
+2021/11/10 18:33:12 Is leader
+2021/11/10 18:33:12 User 76561198863564880 added member role FOR GroupId 23
+2021/11/10 18:33:12 Give user Sonny Barger | 76561197988201979 VIP Role
+2021/11/10 18:33:12 Get group roles
+2021/11/10 18:33:13 GetGroup Error: sql: Scan error on column index 1, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:13 Is leader
+2021/11/10 18:33:13 User 76561197988201979 added member role FOR GroupId 24
+2021/11/10 18:33:13 Get group roles
+2021/11/10 18:33:13 Is leader
+2021/11/10 18:33:13 User 76561198010297835 added member role FOR GroupId 1
+2021/11/10 18:33:14 Get all group roles
+2021/11/10 18:33:14 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:14 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:14 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:24 Get all group roles
+2021/11/10 18:33:24 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:24 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:24 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:34 Get all group roles
+2021/11/10 18:33:34 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:34 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:34 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:44 Give user Jorik Sivuhin | 76561198296372491 VIP Role
+2021/11/10 18:33:44 Get all group roles
+2021/11/10 18:33:44 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:44 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:44 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:54 Get all group roles
+2021/11/10 18:33:54 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:54 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:33:54 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:04 Get group roles
+2021/11/10 18:34:04 Is leader
+2021/11/10 18:34:05 User 76561198346300305 added member role FOR GroupId 1
+2021/11/10 18:34:05 Get all group roles
+2021/11/10 18:34:05 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:05 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:05 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:16 Get group roles
+2021/11/10 18:34:16 GetGroup Error: sql: Scan error on column index 1, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:16 Is leader
+2021/11/10 18:34:16 User 76561199170440897 added leader role FOR GroupId 18
+2021/11/10 18:34:16 Get all group roles
+2021/11/10 18:34:16 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:16 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:16 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:26 Get group roles
+2021/11/10 18:34:26 GetGroup Error: sql: Scan error on column index 1, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:26 Is leader
+2021/11/10 18:34:27 User 76561198023938899 added member role FOR GroupId 24
+2021/11/10 18:34:27 Get group roles
+2021/11/10 18:34:27 Is leader
+2021/11/10 18:34:27 User 76561198030307915 added member role FOR GroupId 11
+2021/11/10 18:34:27 Get all group roles
+2021/11/10 18:34:27 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:27 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:27 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:37 Get all group roles
+2021/11/10 18:34:37 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:37 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:37 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:48 Get all group roles
+2021/11/10 18:34:48 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:48 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:48 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:58 Get group roles
+2021/11/10 18:34:58 Is leader
+2021/11/10 18:34:58 User 76561198125573410 added member role FOR GroupId 22
+2021/11/10 18:34:58 Get group roles
+2021/11/10 18:34:58 Is leader
+2021/11/10 18:34:59 User 76561198262994361 added member role FOR GroupId 11
+2021/11/10 18:34:59 Get group roles
+2021/11/10 18:34:59 Is leader
+2021/11/10 18:34:59 User 76561198357231237 added member role FOR GroupId 1
+2021/11/10 18:34:59 Get all group roles
+2021/11/10 18:34:59 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:59 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:34:59 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:35:09 Get group roles
+2021/11/10 18:35:10 Is leader
+2021/11/10 18:35:10 User 76561198064845403 added member role FOR GroupId 7
+2021/11/10 18:35:10 Get group roles
+2021/11/10 18:35:10 Is leader
+2021/11/10 18:35:10 User 76561198880247910 added member role FOR GroupId 12
+2021/11/10 18:35:11 Give user Dimon Pokemon | 76561198031876685 VIP Role
+2021/11/10 18:35:11 Get all group roles
+2021/11/10 18:35:11 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:35:11 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:35:11 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:35:21 Get group roles
+2021/11/10 18:35:21 Is leader
+2021/11/10 18:35:21 User 76561198297798713 added member role FOR GroupId 9
+2021/11/10 18:35:21 Get group roles
+2021/11/10 18:35:21 Is leader
+2021/11/10 18:35:22 User 76561198381539390 added member role FOR GroupId 23
+2021/11/10 18:35:22 Get group roles
+2021/11/10 18:35:22 Is leader
+2021/11/10 18:35:22 User 76561198376974768 added member role FOR GroupId 1
+2021/11/10 18:35:22 Get group roles
+2021/11/10 18:35:22 Is leader
+2021/11/10 18:35:23 User 76561198805873784 added member role FOR GroupId 7
+2021/11/10 18:35:23 Get all group roles
+2021/11/10 18:35:23 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:35:23 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:35:23 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:35:33 Get group roles
+2021/11/10 18:35:33 Is leader
+2021/11/10 18:35:33 User 76561198800284818 added member role FOR GroupId 6
+2021/11/10 18:35:33 Get group roles
+2021/11/10 18:35:33 Is leader
+2021/11/10 18:35:34 User 76561198220355149 added member role FOR GroupId 1
+2021/11/10 18:35:34 Give user Charles Solomons | 76561198201118419 VIP Role
+2021/11/10 18:35:34 Get group roles
+2021/11/10 18:35:34 Is leader
+2021/11/10 18:35:34 User 76561198201118419 added member role FOR GroupId 7
+2021/11/10 18:35:35 Get group roles
+2021/11/10 18:35:35 Is leader
+2021/11/10 18:35:35 User 76561198142895366 added member role FOR GroupId 9
+2021/11/10 18:35:35 Get group roles
+2021/11/10 18:35:35 Is leader
+2021/11/10 18:35:35 User 76561198357268475 added member role FOR GroupId 9
+2021/11/10 18:35:36 Get all group roles
+2021/11/10 18:35:36 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:35:36 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported
+2021/11/10 18:35:36 GetAllGroup Error: sql: Scan error on column index 0, name "ds_role_leader": converting NULL to string is unsupported

@@ -10,7 +10,6 @@ import (
 	"log"
 	"os"
 	"os/signal"
-	"strings"
 )
 
 var (
@@ -39,17 +38,10 @@ func Start() {
 	}
 
 	BotID = u.ID
-	s.AddHandler(messageHandler)
-	s.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-		if h, ok := commandHandlers[i.ApplicationCommandData().Name]; ok {
-			h(s, i)
-			logger.PrintLog("Command %v called\n", i.ApplicationCommandData().Name)
-		}
-	})
-
-	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
-		logger.PrintLog("Bot is up!")
-	})
+	s.AddHandler(OnMessageHandle)
+	s.AddHandler(OnCommandsCall)
+	s.AddHandler(OnUserConnected)
+	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {logger.PrintLog("Bot is up!")})
 
 	err = s.Open()
 	if err != nil {
@@ -58,51 +50,44 @@ func Start() {
 	}
 	defer s.Close()
 
-	for _, v := range commands {
+	// Удаляем и тут же их добавляем, потому что дискорд принимает изменения очень долго
+	AddRemoveCommands()
 
-		_, err := s.ApplicationCommandCreate(s.State.User.ID, *GuildID, v)
-		if err != nil {
-			logger.PrintLog("Cannot create '%v' command: %v", v.Name, err)
-		}
-		logger.PrintLog("Command %v created", v.Name)
-	}
+	logger.PrintLog("Start goroutines")
+	// RenameUsers()
 
-
-
-	logger.PrintLog("Start goroutine")
 	stop := make(chan os.Signal)
 	signal.Notify(stop, os.Interrupt)
 	<-stop
 	logger.PrintLog("Gracefully shutdown\n************************************************************************\n\n")
 }
 
-func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
+func AddRemoveCommands() {
+	logger.PrintLog("Init commands...")
 
-	if strings.HasPrefix(m.Content, config.BotPrefix) {
-		if m.Author.ID == BotID {
-			return
-		}
+	cmd, err := s.ApplicationCommands(s.State.User.ID, *GuildID)
+	if err != nil {
+		logger.PrintLog(err.Error())
+	}
 
-		if !IsDiscordAdmin(s, m.Author.ID ) {
-			logger.PrintLog("%v попытался использовать!\n", m.Author)
-			return
-		}
-
-		var vars []string
-		var content string
-		inputSplit := strings.Split(m.Content, " ")
-		for idx := range inputSplit {
-			if idx == 0 {
-				content = inputSplit[idx]
-			}else{
-				vars = append(vars, inputSplit[idx])
-			}
-		}
-
-		switch content {
-		case "!help":
-			SendMessage(s, "Помогу, но потом")
-			RenameUsers()
+	for _, elem := range cmd {
+		err := s.ApplicationCommandDelete(s.State.User.ID, *GuildID, elem.ID)
+		if err != nil {
+			logger.PrintLog("Cant delete command %v",elem.Name)
+			logger.PrintLog(err.Error())
+		}else{
+			logger.PrintLog("Command %v deleted",elem.Name)
 		}
 	}
+
+	for _, v := range commands {
+		_, err := s.ApplicationCommandCreate(s.State.User.ID, *GuildID, v)
+		if err != nil {
+			logger.PrintLog("Cannot create '%v' command: %v", v.Name, err)
+		}
+		logger.PrintLog("Command %v created", v.Name)
+	}
+	s.ApplicationCommandBulkOverwrite(s.State.User.ID, *GuildID, commands)
+
+	logger.PrintLog("Init commands finished")
 }

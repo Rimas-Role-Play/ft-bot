@@ -6,3 +6,15 @@ type Player struct {
 	SteamId string
 	Name string
 }
+
+type PlayerStats struct {
+	PlayerInfo Player
+	GroupId int8
+	DonatLevel int8
+}
+
+type GroupRoles struct {
+	GroupId uint
+	DiscordRoleLeader string
+	DiscordRoleMember string
+}
