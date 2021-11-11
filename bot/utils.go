@@ -113,7 +113,7 @@ func DeleteUndefinedUsers() {
 
 // Start ticker routines
 func StartRoutine() {
-	ticker := time.NewTicker(1 * time.Second)
+	ticker := time.NewTicker(60 * time.Second)
 	quit := make(chan struct{})
 	go func() {
 		for {
