@@ -7,7 +7,10 @@ import (
 	"ft-bot/logger"
 )
 
+// Global variable in bd package
 var bd *sql.DB
+
+// Connect to database
 func ConnectDatabase() (*sql.DB, error) {
 	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
 		config.User,

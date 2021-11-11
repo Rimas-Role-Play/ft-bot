@@ -91,7 +91,6 @@ func GetAllGroupsRole() ([]string) {
 //-- Лидер ли он организации
 func IsLeaderGroup(id int8, steamId string) bool {
 	var owner, leader string
-	logger.PrintLog("Is leader")
 	rows, err := bd.Query("SELECT creator, leader FROM `groups` where id = ?",id)
 	if err != nil {
 		logger.PrintLog("IsLeader Error: %v",err.Error())

@@ -2,7 +2,6 @@ package bot
 
 import (
 	"flag"
-	"fmt"
 	"ft-bot/config"
 	"ft-bot/logger"
 	"github.com/bwmarrin/discordgo"
@@ -19,25 +18,20 @@ var (
 	Lg *log.Logger
 )
 
+// discord session
 var s *discordgo.Session
 
-var BotID string
 
+// Starting database
 func Start() {
 	var err error
 	s, err = discordgo.New("Bot " + config.Token)
 
 	if err != nil {
-		fmt.Println(err.Error())
+		logger.PrintLog(err.Error())
 		return
 	}
 
-	u, err := s.User("@me")
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-
-	BotID = u.ID
 	s.AddHandler(OnMessageHandle)
 	s.AddHandler(OnCommandsCall)
 	s.AddHandler(OnUserConnected)
@@ -62,6 +56,7 @@ func Start() {
 	logger.PrintLog("Gracefully shutdown\n************************************************************************\n\n")
 }
 
+// Add commands to bot
 func AddRemoveCommands() {
 	logger.PrintLog("Init commands...")
 

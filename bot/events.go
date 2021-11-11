@@ -7,15 +7,20 @@ import (
 	"strings"
 )
 
+// UserConnect event handler
 func OnUserConnected(s *discordgo.Session, u *discordgo.GuildMemberAdd) {
 	user := u.Member.User
 	logger.PrintLog("New user connected %v#%v | ID: %v",user.Username, user.Discriminator, user.ID )
 }
+
+// UserBoosted event handler
 func OnUserBoosted() {}
+
+// Messages event handler
 func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if strings.HasPrefix(m.Content, config.BotPrefix) {
-		if m.Author.ID == BotID {
+		if m.Author.ID == s.State.User.ID {
 			return
 		}
 
@@ -37,10 +42,12 @@ func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
 		switch content {
 		case "!help":
 			SendMessage(s, "Помогу, но потом")
-			GiveRoles()
+			go GiveRoles()
 		}
 	}
 }
+
+// Command trigger event handler
 func OnCommandsCall(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	if h, ok := commandHandlers[i.ApplicationCommandData().Name]; ok {
 		h(s, i)

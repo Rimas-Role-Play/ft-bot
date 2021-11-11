@@ -10,6 +10,7 @@ import (
 	"time"
 )
 
+// Check is discord admin
 func IsDiscordAdmin(s *discordgo.Session, id string) bool {
 	g, _ := s.GuildMember("719969719871995958", id)
 	log.Println(g.User.Username)
@@ -23,6 +24,8 @@ func IsDiscordAdmin(s *discordgo.Session, id string) bool {
 	log.Println("Admin not found")
 	return false
 }
+
+// Delete leaved or banned users
 func DeleteUndefinedUsers() {
 	uids := bd.GetAllDiscordUids()
 	for _, elem := range uids {
@@ -35,6 +38,8 @@ func DeleteUndefinedUsers() {
 	}
 	log.Printf("All inactive users deleted")
 }
+
+// Rename all users as nickname from game
 func RenameUsers() {
 	ticker := time.NewTicker(4 * 60 * time.Second)
 	quit := make(chan struct{})
@@ -67,6 +72,8 @@ func RenameUsers() {
 func SendMessage(s *discordgo.Session, msg string) {
 	s.ChannelMessageSend("864640641891696641", msg)
 }
+
+// Send information from command get-him
 func GetHim(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	user := i.ApplicationCommandData().Options[0].UserValue(nil)
 	pid := user.ID
@@ -114,8 +121,10 @@ func haveRole(id string, roleId string) bool {
 var vipRoleId = "871508004795723787"
 func GiveRoles() {
 	var users []store.PlayerStats
+	groupRoles := bd.GetAllGroupsRole()
 	users = bd.GetStatsPlayers()
 	for _, elem := range users {
+		logger.PrintLog("Check roles for %v | %v",elem.PlayerInfo.Name, elem.PlayerInfo.SteamId)
 		// Есть ли у него випка
 		if elem.DonatLevel > 0 {
 			// Если нет роли выдаем
@@ -137,15 +146,16 @@ func GiveRoles() {
 			// Если он лидер или владелец выдаем роль главы
 			if bd.IsLeaderGroup(elem.GroupId,elem.PlayerInfo.SteamId) {
 				s.GuildMemberRoleAdd(config.GuildId,elem.PlayerInfo.DSUid,lead)
-				logger.PrintLog("User %v added leader role FOR GroupId %d",elem.PlayerInfo.SteamId, elem.GroupId)
+				logger.PrintLog("User %v added leader role FOR GroupId %d",elem.PlayerInfo.Name, elem.GroupId)
 			}else{ // Если он просто мембер выдаем роль мембера
 				s.GuildMemberRoleAdd(config.GuildId,elem.PlayerInfo.DSUid,member)
-				logger.PrintLog("User %v added member role FOR GroupId %d",elem.PlayerInfo.SteamId, elem.GroupId)
+				logger.PrintLog("User %v added member role FOR GroupId %d",elem.PlayerInfo.Name, elem.GroupId)
 			}
 		// Если нет грп, проходимся по ролям грп и удаляем их
 		}else{
-			for _, role := range bd.GetAllGroupsRole() {
+			for _, role := range groupRoles {
 				if haveRole(elem.PlayerInfo.DSUid, role) {
+					logger.PrintLog("Remove role from %v",elem.PlayerInfo.Name)
 					s.GuildMemberRoleRemove(config.GuildId, elem.PlayerInfo.DSUid, role)
 				}
 			}

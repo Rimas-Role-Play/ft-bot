@@ -13,6 +13,7 @@ type PlayerStats struct {
 	DonatLevel int8
 }
 
+// Groups
 type GroupRoles struct {
 	GroupId uint
 	DiscordRoleLeader string
