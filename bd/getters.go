@@ -22,13 +22,47 @@ func GetQueuePlayers() []string {
 		queue = append(queue, uid)
 	}
 	// Удаляем всех, потому что они больше не нужны
-	bd.Query("TRUNCATE TABLE discord_queue")
+	trunc, _ := bd.Query("TRUNCATE TABLE discord_queue")
+	defer trunc.Close()
 	return queue
 }
 
-//-- Получить данные игрока - ID Group, DonatLevel
+//-- Получить данные определенного игрока в структуре
+func GetPlayer(pid string) (store.PlayerStats, error) {
+	var player store.PlayerStats
+	rows, err := bd.Query("select du.discord_uid, p.uid, p.playerid, p.name from players p inner join discord_users du on p.playerid = du.uid inner join player_hardwares ph on p.playerid = ph.uid where p.playerid = ?",pid)
+	if err != nil {
+		logger.PrintLog(err.Error())
+		return player, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		if err := rows.Scan(&player.PlayerInfo.DSUid, &player.PlayerInfo.Uid, &player.PlayerInfo.SteamId, &player.PlayerInfo.Name); err != nil {
+			logger.PrintLog(err.Error())
+		}
+	}
+
+	if player.PlayerInfo.DSUid == "" {
+		return store.PlayerStats{}, fmt.Errorf("nothing")
+	}
+	rows, err = bd.Query("SELECT group_id, donorlevel from players where playerid = ?",pid)
+	if err != nil {
+		logger.PrintLog(err.Error())
+		return player, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		if err := rows.Scan(&player.GroupId, &player.DonatLevel); err != nil {
+			logger.PrintLog(err.Error())
+		}
+	}
+	fmt.Println(player)
+	return player, nil
+}
+
+//-- Получить данные игроков - ID Group, DonatLevel
 func GetStatsPlayers() []store.PlayerStats {
-	logger.PrintLog("Get stat players")
 	allPlayers := GetAllRegisteredPlayers()
 	var players []store.PlayerStats
 	for _, elem := range allPlayers {
@@ -52,7 +86,6 @@ func GetGroupsRole(id int8) (string,string) {
 	if id == -1 {
 		return "",""
 	}
-	logger.PrintLog("Get group roles")
 	rows, err := bd.Query("SELECT id, ds_role_leader, ds_role_member_id FROM groups WHERE id = ?",id)
 	if err != nil {
 		logger.PrintLog("GetGroup Error: %v",err.Error())
@@ -71,7 +104,6 @@ func GetGroupsRole(id int8) (string,string) {
 
 //-- Получить id всех ролей организации
 func GetAllGroupsRole() ([]string) {
-	logger.PrintLog("Get all group roles")
 	rows, err := bd.Query("SELECT ds_role_leader, ds_role_member_id FROM groups")
 	if err != nil {
 		logger.PrintLog("GetAllGroup Error: %v",err.Error())
@@ -111,7 +143,6 @@ func IsLeaderGroup(id int8, steamId string) bool {
 
 //-- Получить всех кто зарегистрирован
 func GetAllDiscordUids() []string {
-	logger.PrintLog("Get all discord uids")
 	var uids []string
 	rows, err := bd.Query("select discord_uid from discord_users")
 	if err != nil {
@@ -130,7 +161,6 @@ func GetAllDiscordUids() []string {
 
 //-- Удалить зарегистрированного
 func DeleteDiscordUser(pid string) {
-	logger.PrintLog("Delete discord users")
 	rows, err := bd.Query("delete from discord_users where discord_uid = ?",pid)
 	defer rows.Close()
 	if err != nil {
@@ -141,9 +171,6 @@ func DeleteDiscordUser(pid string) {
 
 //-- Получить всех кто зарегистрирован вольно и невольно
 func GetAllRegisteredPlayers() []store.Player {
-
-	logger.PrintLog("Get all registered players")
-
 	rows, err := bd.Query("select du.discord_uid, p.uid, p.playerid, p.name from players p inner join discord_users du on p.playerid = du.uid inner join player_hardwares ph on p.playerid = ph.uid")
 	var plr []store.Player
 	if err != nil {
@@ -164,9 +191,7 @@ func GetAllRegisteredPlayers() []store.Player {
 }
 
 //-- Получить данные определенного игрока
-func GetPlayer(pid string) (string, bool) {
-	logger.PrintLog("Get player")
-
+func GetPlayerStr(pid string) (string, bool) {
 	type Player struct {
 		Uid uint32
 		SteamId string

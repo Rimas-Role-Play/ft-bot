@@ -48,7 +48,7 @@ func Start() {
 	AddRemoveCommands()
 
 	logger.PrintLog("Start goroutines")
-	// RenameUsers()
+	StartRoutine()
 
 	stop := make(chan os.Signal)
 	signal.Notify(stop, os.Interrupt)

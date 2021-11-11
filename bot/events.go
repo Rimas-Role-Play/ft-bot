@@ -1,6 +1,7 @@
 package bot
 
 import (
+	"ft-bot/bd"
 	"ft-bot/config"
 	"ft-bot/logger"
 	"github.com/bwmarrin/discordgo"
@@ -41,8 +42,8 @@ func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 		switch content {
 		case "!help":
-			SendMessage(s, "Помогу, но потом")
-			go GiveRoles()
+		case "!test":
+			bd.GetPlayer("76561198090549826")
 		}
 	}
 }

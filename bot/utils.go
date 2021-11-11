@@ -10,6 +10,78 @@ import (
 	"time"
 )
 
+var vipRoleId = "871508004795723787"
+
+// Listener of discord_queue
+func ListenQueue() {
+	logger.PrintLog("Check queue")
+	queue := bd.GetQueuePlayers()
+	for _, elem := range queue {
+		logger.PrintLog("%v in queue right now", elem)
+		RenameUser(elem)
+		GiveRole(elem)
+	}
+	logger.PrintLog("Queue finished")
+}
+
+func RenameUser(pid string) {
+	var err error
+	player, err := bd.GetPlayer(pid)
+	if err != nil {
+		logger.PrintLog(err.Error())
+		return
+	}
+	err = s.GuildMemberNickname(config.GuildId, player.PlayerInfo.DSUid, player.PlayerInfo.Name)
+	if err != nil {
+		logger.PrintLog("Cant rename %v user",player.PlayerInfo.Name)
+		logger.PrintLog(err.Error())
+	}
+}
+
+func GiveRole(pid string) {
+	player, err := bd.GetPlayer(pid)
+	if err != nil {
+		logger.PrintLog(err.Error())
+		return
+	}
+	groupRoles := bd.GetAllGroupsRole()
+	// Есть ли у него випка
+	if player.DonatLevel > 0 {
+		// Если нет роли выдаем
+		if !haveRole(player.PlayerInfo.DSUid, vipRoleId) {
+			s.GuildMemberRoleAdd(config.GuildId,player.PlayerInfo.DSUid,vipRoleId)
+			logger.PrintLog("Give user %v | %v VIP Role", player.PlayerInfo.Name, player.PlayerInfo.SteamId)
+		}
+	}else{
+		// Випки нет, роль есть, удаляем
+		if haveRole(player.PlayerInfo.DSUid, vipRoleId) {
+			s.GuildMemberRoleRemove(config.GuildId,player.PlayerInfo.DSUid,vipRoleId)
+			logger.PrintLog("Remove user %v | %v VIP Role", player.PlayerInfo.Name, player.PlayerInfo.SteamId)
+		}
+	}
+	// Проверяем ид грп
+	if player.GroupId > 0 {
+		// Получаем роли грп
+		lead, member := bd.GetGroupsRole(player.GroupId)
+		// Если он лидер или владелец выдаем роль главы
+		if bd.IsLeaderGroup(player.GroupId,player.PlayerInfo.SteamId) {
+			s.GuildMemberRoleAdd(config.GuildId,player.PlayerInfo.DSUid,lead)
+			logger.PrintLog("User %v added leader role FOR GroupId %d",player.PlayerInfo.Name, player.GroupId)
+		}else{ // Если он просто мембер выдаем роль мембера
+			s.GuildMemberRoleAdd(config.GuildId,player.PlayerInfo.DSUid,member)
+			logger.PrintLog("User %v added member role FOR GroupId %d",player.PlayerInfo.Name, player.GroupId)
+		}
+		// Если нет грп, проходимся по ролям грп и удаляем их
+	}else{
+		for _, role := range groupRoles {
+			if haveRole(player.PlayerInfo.DSUid, role) {
+				logger.PrintLog("Remove role from %v",player.PlayerInfo.Name)
+				s.GuildMemberRoleRemove(config.GuildId, player.PlayerInfo.DSUid, role)
+			}
+		}
+	}
+}
+
 // Check is discord admin
 func IsDiscordAdmin(s *discordgo.Session, id string) bool {
 	g, _ := s.GuildMember("719969719871995958", id)
@@ -39,29 +111,15 @@ func DeleteUndefinedUsers() {
 	log.Printf("All inactive users deleted")
 }
 
-// Rename all users as nickname from game
-func RenameUsers() {
-	ticker := time.NewTicker(4 * 60 * time.Second)
+// Start ticker routines
+func StartRoutine() {
+	ticker := time.NewTicker(1 * time.Second)
 	quit := make(chan struct{})
 	go func() {
 		for {
 			select {
 			case <- ticker.C:
-				logger.PrintLog("Starting rename")
-				players := bd.GetAllRegisteredPlayers()
-				for idx, _ := range players {
-
-					err := s.GuildMemberNickname(config.GuildId, players[idx].DSUid, players[idx].Name)
-					if err != nil {
-						logger.PrintLog("****************************************************************\n")
-						logger.PrintLog(err.Error())
-						logger.PrintLog("User ID: %v | Uid: %v | Name: %v\n",players[idx].DSUid,players[idx].Uid, players[idx].Name)
-						logger.PrintLog("****************************************************************\n")
-					}else{
-						logger.PrintLog("User: %v, renamed to: %v | IDX: %d/%d", players[idx].DSUid, players[idx].Name, idx, len(players) - 1)
-					}
-				}
-				logger.PrintLog("Renaming is done")
+				ListenQueue()
 			case <- quit:
 				ticker.Stop()
 				return
@@ -69,6 +127,7 @@ func RenameUsers() {
 		}
 	}()
 }
+
 func SendMessage(s *discordgo.Session, msg string) {
 	s.ChannelMessageSend("864640641891696641", msg)
 }
@@ -90,7 +149,7 @@ func GetHim(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		})
 		return
 	}
-	data, found := bd.GetPlayer(pid)
+	data, found := bd.GetPlayerStr(pid)
 	if found {
 		logger.PrintLog("User %v found!",pid)
 	}else{
@@ -109,6 +168,7 @@ func GetHim(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	})
 }
 
+// Is have role
 func haveRole(id string, roleId string) bool {
 	member, _ := s.GuildMember(config.GuildId,id)
 	for _, role := range member.Roles {
@@ -118,7 +178,8 @@ func haveRole(id string, roleId string) bool {
 	}
 	return false
 }
-var vipRoleId = "871508004795723787"
+
+// Giving roles
 func GiveRoles() {
 	var users []store.PlayerStats
 	groupRoles := bd.GetAllGroupsRole()
@@ -161,4 +222,5 @@ func GiveRoles() {
 			}
 		}
 	}
+	logger.PrintLog("Giving role finished")
 }
