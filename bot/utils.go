@@ -11,6 +11,7 @@ import (
 )
 
 var vipRoleId = "871508004795723787"
+var regRoleId = "864630308242849825"
 
 // Listener of discord_queue
 func ListenQueue() {
@@ -44,8 +45,15 @@ func GiveRole(pid string) {
 		logger.PrintLog(err.Error())
 		return
 	}
+	RoleAction(player)
+}
+
+func RoleAction(player store.PlayerStats) {
 	groupRoles := bd.GetAllGroupsRole()
-	// Есть ли у него випка
+	if !haveRole(player.PlayerInfo.DSUid, regRoleId) {
+		logger.PrintLog("Местный житель not found! %v",player.PlayerInfo.Name)
+		s.GuildMemberRoleAdd(config.GuildId, player.PlayerInfo.DSUid,regRoleId)
+	}
 	if player.DonatLevel > 0 {
 		// Если нет роли выдаем
 		if !haveRole(player.PlayerInfo.DSUid, vipRoleId) {
@@ -59,6 +67,15 @@ func GiveRole(pid string) {
 			logger.PrintLog("Remove user %v | %v VIP Role", player.PlayerInfo.Name, player.PlayerInfo.SteamId)
 		}
 	}
+
+	// удаляем все грп роли
+	for _, role := range groupRoles {
+		if haveRole(player.PlayerInfo.DSUid, role) {
+			logger.PrintLog("Remove role from %v",player.PlayerInfo.Name)
+			s.GuildMemberRoleRemove(config.GuildId, player.PlayerInfo.DSUid, role)
+		}
+	}
+
 	// Проверяем ид грп
 	if player.GroupId > 0 {
 		// Получаем роли грп
@@ -72,13 +89,6 @@ func GiveRole(pid string) {
 			logger.PrintLog("User %v added member role FOR GroupId %d",player.PlayerInfo.Name, player.GroupId)
 		}
 		// Если нет грп, проходимся по ролям грп и удаляем их
-	}else{
-		for _, role := range groupRoles {
-			if haveRole(player.PlayerInfo.DSUid, role) {
-				logger.PrintLog("Remove role from %v",player.PlayerInfo.Name)
-				s.GuildMemberRoleRemove(config.GuildId, player.PlayerInfo.DSUid, role)
-			}
-		}
 	}
 }
 
@@ -182,45 +192,9 @@ func haveRole(id string, roleId string) bool {
 // Giving roles
 func GiveRoles() {
 	var users []store.PlayerStats
-	groupRoles := bd.GetAllGroupsRole()
 	users = bd.GetStatsPlayers()
 	for _, elem := range users {
-		logger.PrintLog("Check roles for %v | %v",elem.PlayerInfo.Name, elem.PlayerInfo.SteamId)
-		// Есть ли у него випка
-		if elem.DonatLevel > 0 {
-			// Если нет роли выдаем
-			if !haveRole(elem.PlayerInfo.DSUid, vipRoleId) {
-				s.GuildMemberRoleAdd(config.GuildId,elem.PlayerInfo.DSUid,vipRoleId)
-				logger.PrintLog("Give user %v | %v VIP Role", elem.PlayerInfo.Name, elem.PlayerInfo.SteamId)
-			}
-		}else{
-			// Випки нет, роль есть, удаляем
-			if haveRole(elem.PlayerInfo.DSUid, vipRoleId) {
-				s.GuildMemberRoleRemove(config.GuildId,elem.PlayerInfo.DSUid,vipRoleId)
-				logger.PrintLog("Remove user %v | %v VIP Role", elem.PlayerInfo.Name, elem.PlayerInfo.SteamId)
-			}
-		}
-		// Проверяем ид грп
-		if elem.GroupId > 0 {
-			// Получаем роли грп
-			lead, member := bd.GetGroupsRole(elem.GroupId)
-			// Если он лидер или владелец выдаем роль главы
-			if bd.IsLeaderGroup(elem.GroupId,elem.PlayerInfo.SteamId) {
-				s.GuildMemberRoleAdd(config.GuildId,elem.PlayerInfo.DSUid,lead)
-				logger.PrintLog("User %v added leader role FOR GroupId %d",elem.PlayerInfo.Name, elem.GroupId)
-			}else{ // Если он просто мембер выдаем роль мембера
-				s.GuildMemberRoleAdd(config.GuildId,elem.PlayerInfo.DSUid,member)
-				logger.PrintLog("User %v added member role FOR GroupId %d",elem.PlayerInfo.Name, elem.GroupId)
-			}
-		// Если нет грп, проходимся по ролям грп и удаляем их
-		}else{
-			for _, role := range groupRoles {
-				if haveRole(elem.PlayerInfo.DSUid, role) {
-					logger.PrintLog("Remove role from %v",elem.PlayerInfo.Name)
-					s.GuildMemberRoleRemove(config.GuildId, elem.PlayerInfo.DSUid, role)
-				}
-			}
-		}
+		RoleAction(elem)
 	}
 	logger.PrintLog("Giving role finished")
 }

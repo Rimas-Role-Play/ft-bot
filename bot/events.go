@@ -1,10 +1,11 @@
 package bot
 
 import (
-	"ft-bot/bd"
+	"fmt"
 	"ft-bot/config"
 	"ft-bot/logger"
 	"github.com/bwmarrin/discordgo"
+	"log"
 	"strings"
 )
 
@@ -15,7 +16,10 @@ func OnUserConnected(s *discordgo.Session, u *discordgo.GuildMemberAdd) {
 }
 
 // UserBoosted event handler
-func OnUserBoosted() {}
+func OnUserBoosted(s *discordgo.Session, i *discordgo.GuildMemberUpdate) {
+	fmt.Printf("Fired\n")
+	fmt.Println(i.Member.User.Username)
+}
 
 // Messages event handler
 func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
@@ -43,7 +47,7 @@ func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
 		switch content {
 		case "!help":
 		case "!test":
-			bd.GetPlayer("76561198090549826")
+			go GiveRoles()
 		}
 	}
 }
@@ -54,4 +58,9 @@ func OnCommandsCall(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		h(s, i)
 		logger.PrintLog("Command %v called\n", i.ApplicationCommandData().Name)
 	}
+}
+
+// Reaction trigger
+func OnReactMessage(s *discordgo.Session, i *discordgo.MessageReactionAdd) {
+	log.Println(i)
 }

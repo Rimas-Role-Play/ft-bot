@@ -32,10 +32,14 @@ func Start() {
 		return
 	}
 
+	s.AddHandler(OnUserBoosted)
 	s.AddHandler(OnMessageHandle)
 	s.AddHandler(OnCommandsCall)
 	s.AddHandler(OnUserConnected)
-	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {logger.PrintLog("Bot is up!")})
+	s.AddHandler(OnReactMessage)
+	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
+
+		logger.PrintLog("Bot is up!")})
 
 	err = s.Open()
 	if err != nil {
