@@ -1,6 +1,7 @@
 package bot
 
 import (
+	"ft-bot/bd"
 	"ft-bot/logger"
 	"github.com/bwmarrin/discordgo"
 )
@@ -21,6 +22,18 @@ var (
 		},
 		{
 			Name:        "get-him",
+			Description: "Получить данные игрока",
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionUser,
+					Name:        "user-option",
+					Description: "Тегните пользователя",
+					Required:    true,
+				},
+			},
+		},
+		{
+			Name:        "re-name",
 			Description: "Получить данные игрока",
 			Options: []*discordgo.ApplicationCommandOption{
 				{
@@ -68,6 +81,22 @@ var (
 			})
 			GiveRoles()
 			logger.PrintLog("reRole called")
+		},
+		"re-name": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+			user := i.ApplicationCommandData().Options[0].UserValue(nil)
+			pid := user.ID
+			sender := i.Interaction.Member.User
+			if !IsDiscordAdmin(s, sender.ID) {
+				PrintHiddenMessage(s,i,"У вас нет доступа")
+				return
+			}
+			player, err := bd.GetUserByDS(pid)
+			if err != nil {
+				PrintHiddenMessage(s,i,"Пользователь не найден")
+				return
+			}
+			RenameUser(player.PlayerInfo.SteamId)
+			PrintHiddenMessage(s,i,"Запрос отправлен")
 		},
 	}
 )

@@ -150,13 +150,7 @@ func GetHim(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	logger.PrintLog("User %v#%v want get information about %v",sender.Username, sender.Discriminator, pid)
 	if !IsDiscordAdmin(s, i.Interaction.Member.User.ID) {
 		logger.PrintLog("User %v#%v dont have access to /gethim",sender.Username, sender.Discriminator)
-		s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-			Type: discordgo.InteractionResponseChannelMessageWithSource,
-			Data: &discordgo.InteractionResponseData{
-				Flags:   1 << 6,
-				Content: "У вас нет доступа",
-			},
-		})
+		PrintHiddenMessage(s,i,"У вас нет доступа")
 		return
 	}
 	data, found := bd.GetPlayerStr(pid)
@@ -165,15 +159,15 @@ func GetHim(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	}else{
 		logger.PrintLog(data)
 	}
+	PrintHiddenMessage(s,i,data)
+}
 
+func PrintHiddenMessage(s *discordgo.Session, i *discordgo.InteractionCreate, msg string) {
 	s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 		Type: discordgo.InteractionResponseChannelMessageWithSource,
 		Data: &discordgo.InteractionResponseData{
-			// Note: this isn't documented, but you can use that if you want to.
-			// This flag just allows you to create messages visible only for the caller of the command
-			// (user who triggered the command)
 			Flags:   1 << 6,
-			Content: data,
+			Content: msg,
 		},
 	})
 }

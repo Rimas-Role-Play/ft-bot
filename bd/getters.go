@@ -81,6 +81,40 @@ func GetStatsPlayers() []store.PlayerStats {
 	return players
 }
 
+
+func GetUserByDS(pid string) (store.PlayerStats, error) {
+	var player store.PlayerStats
+	rows, err := bd.Query("select du.discord_uid, p.uid, p.playerid, p.name from players p inner join discord_users du on p.playerid = du.uid inner join player_hardwares ph on p.playerid = ph.uid where du.discord_uid = ? or ph.discord_id = ?",pid,pid)
+	if err != nil {
+		logger.PrintLog(err.Error())
+		return player, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		if err := rows.Scan(&player.PlayerInfo.DSUid, &player.PlayerInfo.Uid, &player.PlayerInfo.SteamId, &player.PlayerInfo.Name); err != nil {
+			logger.PrintLog(err.Error())
+		}
+	}
+
+	if player.PlayerInfo.DSUid == "" {
+		return store.PlayerStats{}, fmt.Errorf("nothing")
+	}
+	rows, err = bd.Query("SELECT group_id, donorlevel from players where playerid = ?",player.PlayerInfo.SteamId)
+	if err != nil {
+		logger.PrintLog(err.Error())
+		return player, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		if err := rows.Scan(&player.GroupId, &player.DonatLevel); err != nil {
+			logger.PrintLog(err.Error())
+		}
+	}
+	fmt.Println(player)
+	return player, nil
+}
+
 //-- Получить id ролей организации
 func GetGroupsRole(id int8) (string,string) {
 	if id == -1 {
@@ -219,3 +253,4 @@ func GetPlayerStr(pid string) (string, bool) {
 	}
 	return fmt.Sprintf("Игрок: %v\nID: %d\nPID: %v\nДонат уровень: %d ур.\nRC: %d\n",plr.Name,plr.Uid,plr.SteamId,plr.DonatLevel,plr.RC), true
 }
+
