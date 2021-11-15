@@ -98,7 +98,7 @@ func IsDiscordAdmin(s *discordgo.Session, id string) bool {
 	log.Println(g.User.Username)
 	roles := g.Roles
 	for idx, _ := range roles {
-		if roles[idx] == "775499720222310411" || roles[idx] == "878824238075748372" || roles[idx] == "866252450234630204" {
+		if roles[idx] == "775499720222310411" || roles[idx] == "878824238075748372" || roles[idx] == "871798511178506240" {
 			log.Println("Admin found")
 			return true
 		}

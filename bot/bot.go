@@ -32,7 +32,8 @@ func Start() {
 		return
 	}
 
-	s.AddHandler(OnUserBoosted)
+	s.Identify.Intents = discordgo.MakeIntent(discordgo.IntentsAll)
+	s.AddHandler(OnUserChanged)
 	s.AddHandler(OnMessageHandle)
 	s.AddHandler(OnCommandsCall)
 	s.AddHandler(OnUserConnected)

@@ -16,9 +16,16 @@ func OnUserConnected(s *discordgo.Session, u *discordgo.GuildMemberAdd) {
 }
 
 // UserBoosted event handler
-func OnUserBoosted(s *discordgo.Session, i *discordgo.GuildMemberUpdate) {
-	fmt.Printf("Fired\n")
+func OnUserChanged(s *discordgo.Session, i *discordgo.GuildMemberUpdate ) {
+	fmt.Printf("Old memeber\n")
+	state := s.State
+	oldMember, _ := state.Member(i.GuildID,i.User.ID)
 	fmt.Println(i.Member.User.Username)
+	fmt.Println(oldMember.Roles)
+
+	fmt.Printf("New memeber\n")
+	fmt.Println(i.Member.User.Username)
+	fmt.Println(i.Member.Roles)
 }
 
 // Messages event handler
