@@ -95,12 +95,13 @@ func RoleAction(player store.PlayerStats) {
 // Check is discord admin
 func IsDiscordAdmin(s *discordgo.Session, id string) bool {
 	g, _ := s.GuildMember("719969719871995958", id)
-	log.Println(g.User.Username)
 	roles := g.Roles
-	for idx, _ := range roles {
-		if roles[idx] == "775499720222310411" || roles[idx] == "878824238075748372" || roles[idx] == "871798511178506240" {
-			log.Println("Admin found")
-			return true
+	for _, i := range config.GetAdminRoles() {
+		for _, y := range roles {
+			if i == y {
+				log.Println("Admin found")
+				return true
+			}
 		}
 	}
 	log.Println("Admin not found")

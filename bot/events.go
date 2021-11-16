@@ -54,7 +54,9 @@ func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
 		switch content {
 		case "!help":
 		case "!test":
-			go GiveRoles()
+			msg, _ := s.ChannelMessage("866255272497512468","909905575712817162")
+			fmt.Printf("Author: %v\n", msg.Author.Username)
+			fmt.Printf("Message: %v\n", msg.Type)
 		}
 	}
 }

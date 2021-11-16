@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"ft-bot/logger"
 	"io/ioutil"
+	"math/rand"
+	"time"
 )
 
 var (
@@ -21,7 +23,6 @@ var (
 	cfg *configStruct
 )
 
-
 type configStruct struct {
 	Token     	string `json:"Token"`
 	BotPrefix 	string `json:"BotPrefix"`
@@ -32,6 +33,18 @@ type configStruct struct {
 	User 		string `json:"User"`
 	Password 	string `json:"Password"`
 	GuildId 	string `json:"GuildId"`
+	AdminRoles 	[]string `json:"adminRoles"`
+	VehiclesForBoost 	[]string `json:"vehiclesForBoost"`
+}
+
+func GetAdminRoles() []string {
+	return cfg.AdminRoles
+}
+
+func GetRandomVehicle() string {
+	rand.Seed(time.Now().Unix())
+	random := rand.Intn(len(cfg.VehiclesForBoost))
+	return cfg.VehiclesForBoost[random]
 }
 
 func ReadConfig() error {
