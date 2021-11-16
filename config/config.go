@@ -34,17 +34,29 @@ type configStruct struct {
 	Password 	string `json:"Password"`
 	GuildId 	string `json:"GuildId"`
 	AdminRoles 	[]string `json:"adminRoles"`
-	VehiclesForBoost 	[]string `json:"vehiclesForBoost"`
+	VehiclesForBoost []struct{
+		Classname 	string `json:"classname"`
+		Image 		string `json:"image"`
+		DisplayName string `json:"display_name"`
+	} `json:"vehiclesForBoost"`
 }
 
 func GetAdminRoles() []string {
 	return cfg.AdminRoles
 }
 
-func GetRandomVehicle() string {
+type Vehicles struct {
+	Classname string
+	Image string
+	DisplayName string
+}
+
+
+func GetRandomVehicle() Vehicles {
 	rand.Seed(time.Now().Unix())
 	random := rand.Intn(len(cfg.VehiclesForBoost))
-	return cfg.VehiclesForBoost[random]
+	veh := cfg.VehiclesForBoost[random]
+	return Vehicles{veh.Classname,veh.Image,veh.DisplayName}
 }
 
 func ReadConfig() error {

@@ -8,5 +8,28 @@
   "Password": "32161924374",
   "GuildId": "719969719871995958",
   "adminRoles": ["871798511178506240","775499720222310411","878824238075748372"],
-  "vehiclesForBoost": ["veh1","veh2","veh3","veh4"]
+  "vehiclesForBoost":
+  [
+    {
+      "classname": "d3s_e38_98_discordBooster",
+      "image": "https://imgur.com/wJVNNJZ.jpg",
+      "display_name": "BMW 730i Discord Booster"
+    },
+    {
+      "classname": "d3s_e60_09_discordBooster",
+      "image": "https://imgur.com/qFIlowT.jpg",
+      "display_name": "BMW M5 Sport Discord Booster"
+    },
+    {
+      "classname": "d3s_g63amg_18_discordBooster",
+      "image": "https://imgur.com/2vXpznK.jpg",
+      "display_name": "Mercedes-AMG G63 Discord Booster"
+    },
+    {
+      "classname": "d3s_svr_17_discordBooster",
+      "image": "https://imgur.com/mi5erUj.jpg",
+      "display_name": "Range Rover SVR Discord Booster"
+    }
+  ]
 }
+

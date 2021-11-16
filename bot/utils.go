@@ -1,6 +1,7 @@
 package bot
 
 import (
+	"fmt"
 	"ft-bot/bd"
 	"ft-bot/config"
 	"ft-bot/logger"
@@ -192,4 +193,43 @@ func GiveRoles() {
 		RoleAction(elem)
 	}
 	logger.PrintLog("Giving role finished")
+}
+
+func giveBoostPresent(channelId string, user *discordgo.User) {
+	player, err := bd.GetUserByDS(user.ID)
+	if err != nil {
+		logger.PrintLog("Cant give vehicle for boost: %v", err.Error())
+	}
+	vehicle := config.GetRandomVehicle()
+	bd.InsertVehicle(vehicle.Classname,player.PlayerInfo.SteamId)
+	s.ChannelMessageSend(channelId,pingUser(user.ID))
+	s.ChannelMessageSendEmbed(channelId, createEmbedNitroBooster(vehicle))
+	logger.PrintLog("%v boosted server and given %v",user.Username,vehicle.DisplayName)
+}
+
+func createEmbedNitroBooster(vehicle config.Vehicles) *discordgo.MessageEmbed {
+	embed := &discordgo.MessageEmbed{
+		URL: "",
+		Type: discordgo.EmbedTypeImage,
+		Title: "Nitro Booster",
+		Description: fmt.Sprintf("Спасибо за буст сервера!\nТвой подарок твой бонус %v уже доступен на сервере!",vehicle.DisplayName),
+		Timestamp: "",
+		Color: 0x9300FF,
+		Footer: &discordgo.MessageEmbedFooter{
+			Text:         "Nitro Boost",
+			IconURL:      "",
+			ProxyIconURL: "",
+		},
+		Image: &discordgo.MessageEmbedImage{
+			URL:      vehicle.Image,
+			ProxyURL: "",
+			Width:    0,
+			Height:   0,
+		},
+	}
+	return embed
+}
+
+func pingUser(id string) string {
+	return fmt.Sprintf("<@%v>",id)
 }

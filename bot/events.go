@@ -1,7 +1,7 @@
 package bot
 
 import (
-	"fmt"
+	"ft-bot/bd"
 	"ft-bot/config"
 	"ft-bot/logger"
 	"github.com/bwmarrin/discordgo"
@@ -16,20 +16,24 @@ func OnUserConnected(s *discordgo.Session, u *discordgo.GuildMemberAdd) {
 }
 
 // UserBoosted event handler
-func OnUserChanged(s *discordgo.Session, i *discordgo.GuildMemberUpdate ) {
-	fmt.Printf("Old memeber\n")
-	state := s.State
-	oldMember, _ := state.Member(i.GuildID,i.User.ID)
-	fmt.Println(i.Member.User.Username)
-	fmt.Println(oldMember.Roles)
-
-	fmt.Printf("New memeber\n")
-	fmt.Println(i.Member.User.Username)
-	fmt.Println(i.Member.Roles)
-}
+func OnUserChanged(s *discordgo.Session, i *discordgo.GuildMemberUpdate ) {}
 
 // Messages event handler
 func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
+	switch m.Message.Type {
+	case 7:
+		bd.InsertMessageLog(m.ChannelID,m.ID,m.Author,m.Message.Type)
+
+	case discordgo.MessageTypeUserPremiumGuildSubscriptionTierOne:
+		fallthrough
+	case discordgo.MessageTypeUserPremiumGuildSubscriptionTierTwo:
+		fallthrough
+	case discordgo.MessageTypeUserPremiumGuildSubscriptionTierThree:
+		fallthrough
+	case discordgo.MessageTypeUserPremiumGuildSubscription:
+		bd.InsertMessageLog(m.ChannelID,m.ID,m.Author,m.Message.Type)
+		giveBoostPresent(m.ChannelID,m.Author)
+	}
 
 	if strings.HasPrefix(m.Content, config.BotPrefix) {
 		if m.Author.ID == s.State.User.ID {
@@ -54,9 +58,6 @@ func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
 		switch content {
 		case "!help":
 		case "!test":
-			msg, _ := s.ChannelMessage("866255272497512468","909905575712817162")
-			fmt.Printf("Author: %v\n", msg.Author.Username)
-			fmt.Printf("Message: %v\n", msg.Type)
 		}
 	}
 }
