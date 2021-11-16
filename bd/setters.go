@@ -51,7 +51,7 @@ func generatePlateNumber() string {
 
 func InsertVehicle(pid string, classname string) {
 	rows, err := bd.Query("INSERT INTO vehicles SET servermap = 'RRpMap',classname = ?, pid = ?, plate = ?," +
-		"type = 'Car', alive = '1', active = '1', inventory = '[[],0]',color = 'default', material = 'default', gear = '[]', damage = '0', hitpoints = '[]', baseprice = 10000, spname = 'none', parking = '[]', maxslots = 60, tuning_data = '[[\"nitro\"],[\"tracker\"],[\"breaking\"],[\"seatbelt\"]]', distance = '0', deleted_at = NULL, comment = ''",
+		"type = 'Car', alive = '1', active = '0', inventory = '[[],0]',color = 'default', material = 'default', gear = '[]', damage = '0', hitpoints = '[]', baseprice = 10000, spname = 'none', parking = '[]', maxslots = 60, tuning_data = '[[\"nitro\"],[\"tracker\"],[\"breaking\"],[\"seatbelt\"]]', distance = '0', deleted_at = NULL, comment = ''",
 		pid,classname,generatePlateNumber())
 
 	defer rows.Close()
