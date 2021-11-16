@@ -212,7 +212,7 @@ func createEmbedNitroBooster(vehicle config.Vehicles) *discordgo.MessageEmbed {
 		URL: "",
 		Type: discordgo.EmbedTypeImage,
 		Title: "Nitro Booster",
-		Description: fmt.Sprintf("Спасибо за буст сервера!\nТвой подарок твой бонус %v уже доступен на сервере!",vehicle.DisplayName),
+		Description: fmt.Sprintf("Спасибо за буст сервера!\nТвой подарок %v уже доступен на сервере!",vehicle.DisplayName),
 		Timestamp: "",
 		Color: 0x9300FF,
 		Footer: &discordgo.MessageEmbedFooter{
