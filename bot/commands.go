@@ -44,6 +44,18 @@ var (
 				},
 			},
 		},
+		{
+			Name:        "give-boost",
+			Description: "Получить данные игрока",
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionUser,
+					Name:        "user-option",
+					Description: "Тегните пользователя",
+					Required:    true,
+				},
+			},
+		},
 	}
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
 		"help": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
@@ -96,6 +108,16 @@ var (
 				return
 			}
 			RenameUser(player.PlayerInfo.SteamId)
+			PrintHiddenMessage(s,i,"Запрос отправлен")
+		},
+		"give-boost": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+			user := i.ApplicationCommandData().Options[0].UserValue(nil)
+			sender := i.Interaction.Member.User
+			if !IsDiscordAdmin(s, sender.ID) {
+				PrintHiddenMessage(s, i, "У вас нет доступа")
+				return
+			}
+			giveBoostPresent(i.ChannelID,user)
 			PrintHiddenMessage(s,i,"Запрос отправлен")
 		},
 	}
