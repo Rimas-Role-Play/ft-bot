@@ -193,16 +193,6 @@ func GetAllDiscordUids() []string {
 	return uids
 }
 
-//-- Удалить зарегистрированного
-func DeleteDiscordUser(pid string) {
-	rows, err := bd.Query("delete from discord_users where discord_uid = ?",pid)
-	defer rows.Close()
-	if err != nil {
-		logger.PrintLog("DeleteUser Error: %v",err.Error())
-		return
-	}
-}
-
 //-- Получить всех кто зарегистрирован вольно и невольно
 func GetAllRegisteredPlayers() []store.Player {
 	rows, err := bd.Query("select du.discord_uid, p.uid, p.playerid, p.name from players p inner join discord_users du on p.playerid = du.uid inner join player_hardwares ph on p.playerid = ph.uid")
