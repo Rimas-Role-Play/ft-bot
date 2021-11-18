@@ -199,6 +199,9 @@ func giveBoostPresent(channelId string, user *discordgo.User) {
 	player, err := bd.GetUserByDS(user.ID)
 	if err != nil {
 		logger.PrintLog("Cant give vehicle for boost: %v", err.Error())
+		s.ChannelMessageSend(channelId,pingUser(user.ID))
+		s.ChannelMessageSend(channelId,"Мы не нашли ваш аккаунт на сервере, привяжите ваш аккаунт и напишите администрации за получением бонуса")
+		return
 	}
 	vehicle := config.GetRandomVehicle()
 	bd.InsertVehicle(vehicle.Classname,player.PlayerInfo.SteamId)

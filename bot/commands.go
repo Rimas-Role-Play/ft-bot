@@ -46,7 +46,7 @@ var (
 		},
 		{
 			Name:        "give-boost",
-			Description: "Получить данные игрока",
+			Description: "Выдать подарок за буст сервера",
 			Options: []*discordgo.ApplicationCommandOption{
 				{
 					Type:        discordgo.ApplicationCommandOptionUser,
