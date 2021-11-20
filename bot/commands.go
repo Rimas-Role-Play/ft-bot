@@ -34,7 +34,7 @@ var (
 		},
 		{
 			Name:        "re-name",
-			Description: "Получить данные игрока",
+			Description: "Задать игровое имя пользователю",
 			Options: []*discordgo.ApplicationCommandOption{
 				{
 					Type:        discordgo.ApplicationCommandOptionUser,

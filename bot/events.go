@@ -15,6 +15,13 @@ func OnUserConnected(s *discordgo.Session, u *discordgo.GuildMemberAdd) {
 	logger.PrintLog("New user connected %v#%v | ID: %v",user.Username, user.Discriminator, user.ID )
 }
 
+// UserDisconnected event handler
+func OnUserDisconnected(s *discordgo.Session, u *discordgo.GuildMemberAdd) {
+	user := u.Member.User
+	logger.PrintLog("User disconnected %v#%v | ID: %v",user.Username, user.Discriminator, user.ID )
+	bd.DeleteDiscordUser(user.ID)
+}
+
 // UserBoosted event handler
 func OnUserChanged(s *discordgo.Session, i *discordgo.GuildMemberUpdate ) {}
 

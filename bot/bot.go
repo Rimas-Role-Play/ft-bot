@@ -37,9 +37,9 @@ func Start() {
 	s.AddHandler(OnMessageHandle)
 	s.AddHandler(OnCommandsCall)
 	s.AddHandler(OnUserConnected)
+	s.AddHandler(OnUserDisconnected)
 	s.AddHandler(OnReactMessage)
 	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
-
 		logger.PrintLog("Bot is up!")})
 
 	err = s.Open()
