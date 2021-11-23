@@ -59,39 +59,28 @@ var (
 	}
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
 		"help": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-				Type: discordgo.InteractionResponseChannelMessageWithSource,
-				Data: &discordgo.InteractionResponseData{
-					Content: "Используй команду getHim чтобы получить данные о пользователе!",
-				},
-			})
+			PrintHiddenMessage(s,i,"Бот для управления и администрирования сервера Rimas Life")
 		},
 		"get-him": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			GetHim(s,i)
 		},
+		"re-name-all": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+			go GetHim(s,i)
+		},
 		"delete-undefined-users": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			if !IsDiscordAdmin(s, i.Member.User.ID) {
+				PrintHiddenMessage(s,i,"У вас нет доступа")
 				return
 			}
-			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-				Type: discordgo.InteractionResponseChannelMessageWithSource,
-				Data: &discordgo.InteractionResponseData{
-					Content: "Удаляю всех неизвестных...",
-				},
-			})
+			PrintHiddenMessage(s,i,"Удаляю всех неизвестных...")
 			DeleteUndefinedUsers()
 		},
 		"re-role": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			if !IsDiscordAdmin(s, i.Member.User.ID) {
 				return
 			}
-			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-				Type: discordgo.InteractionResponseChannelMessageWithSource,
-				Data: &discordgo.InteractionResponseData{
-					Content: "Перепроверяю все роли...",
-				},
-			})
-			GiveRoles()
+			PrintHiddenMessage(s,i,"Перепроверяю все роли...")
+			go GiveRoles()
 			logger.PrintLog("reRole called")
 		},
 		"re-name": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
