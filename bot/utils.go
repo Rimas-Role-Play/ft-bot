@@ -16,14 +16,12 @@ var regRoleId = "864630308242849825"
 
 // Listener of discord_queue
 func ListenQueue() {
-	logger.PrintLog("Check queue")
 	queue := bd.GetQueuePlayers()
 	for _, elem := range queue {
 		logger.PrintLog("%v in queue right now", elem)
 		RenameUser(elem)
 		GiveRole(elem)
 	}
-	logger.PrintLog("Queue finished")
 }
 
 func RenameUser(pid string) {
