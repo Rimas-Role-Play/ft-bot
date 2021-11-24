@@ -6,6 +6,11 @@ import (
 	"ft-bot/store"
 )
 
+//-- Получить автомобили в продаже
+func GetVehiclePriceList() {
+
+}
+
 //-- Получаем очередь игроков на обновление
 func GetQueuePlayers() []string {
 	var queue []string
@@ -80,7 +85,6 @@ func GetStatsPlayers() []store.PlayerStats {
 	}
 	return players
 }
-
 
 func GetUserByDS(pid string) (store.PlayerStats, error) {
 	var player store.PlayerStats
