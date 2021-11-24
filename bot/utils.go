@@ -53,18 +53,18 @@ func RoleAction(player store.PlayerStats) {
 	groupRoles := bd.GetAllGroupsRole()
 	if !haveRole(player.PlayerInfo.DSUid, regRoleId) {
 		logger.PrintLog("Местный житель not found! %v",player.PlayerInfo.Name)
-		s.GuildMemberRoleAdd(config.GuildId, player.PlayerInfo.DSUid,regRoleId)
+		setRole(config.GuildId, player.PlayerInfo.DSUid,regRoleId)
 	}
 	if player.DonatLevel > 0 {
 		// Если нет роли выдаем
 		if !haveRole(player.PlayerInfo.DSUid, vipRoleId) {
-			s.GuildMemberRoleAdd(config.GuildId,player.PlayerInfo.DSUid,vipRoleId)
+			setRole(config.GuildId,player.PlayerInfo.DSUid,vipRoleId)
 			logger.PrintLog("Give user %v | %v VIP Role", player.PlayerInfo.Name, player.PlayerInfo.SteamId)
 		}
 	}else{
 		// Випки нет, роль есть, удаляем
 		if haveRole(player.PlayerInfo.DSUid, vipRoleId) {
-			s.GuildMemberRoleRemove(config.GuildId,player.PlayerInfo.DSUid,vipRoleId)
+			remRole(config.GuildId,player.PlayerInfo.DSUid,vipRoleId)
 			logger.PrintLog("Remove user %v | %v VIP Role", player.PlayerInfo.Name, player.PlayerInfo.SteamId)
 		}
 	}
@@ -73,7 +73,7 @@ func RoleAction(player store.PlayerStats) {
 	for _, role := range groupRoles {
 		if haveRole(player.PlayerInfo.DSUid, role) {
 			logger.PrintLog("Remove role from %v",player.PlayerInfo.Name)
-			s.GuildMemberRoleRemove(config.GuildId, player.PlayerInfo.DSUid, role)
+			remRole(config.GuildId, player.PlayerInfo.DSUid, role)
 		}
 	}
 
@@ -83,14 +83,38 @@ func RoleAction(player store.PlayerStats) {
 		lead, member := bd.GetGroupsRole(player.GroupId)
 		// Если он лидер или владелец выдаем роль главы
 		if bd.IsLeaderGroup(player.GroupId,player.PlayerInfo.SteamId) {
-			s.GuildMemberRoleAdd(config.GuildId,player.PlayerInfo.DSUid,lead)
+			setRole(config.GuildId,player.PlayerInfo.DSUid,lead)
 			logger.PrintLog("User %v added leader role FOR GroupId %d",player.PlayerInfo.Name, player.GroupId)
 		}else{ // Если он просто мембер выдаем роль мембера
-			s.GuildMemberRoleAdd(config.GuildId,player.PlayerInfo.DSUid,member)
+			setRole(config.GuildId,player.PlayerInfo.DSUid,member)
 			logger.PrintLog("User %v added member role FOR GroupId %d",player.PlayerInfo.Name, player.GroupId)
 		}
 		// Если нет грп, проходимся по ролям грп и удаляем их
 	}
+}
+
+func setRole(guildId string, uid string, role string) bool {
+	_, err := s.GuildMember(guildId,uid)
+	if err != nil {
+		log.Println(err.Error())
+		log.Printf("User: %v will be deleted",uid)
+		bd.DeleteDiscordUser(uid)
+		return false
+	}
+	s.GuildMemberRoleAdd(guildId,uid,role)
+	return true
+}
+
+func remRole(guildId string, uid string, role string) bool {
+	_, err := s.GuildMember(guildId,uid)
+	if err != nil {
+		log.Println(err.Error())
+		log.Printf("User: %v will be deleted",uid)
+		bd.DeleteDiscordUser(uid)
+		return false
+	}
+	s.GuildMemberRoleRemove(guildId,uid,role)
+	return true
 }
 
 // Check is discord admin
