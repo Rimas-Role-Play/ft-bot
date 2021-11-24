@@ -59,27 +59,27 @@ var (
 	}
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
 		"help": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			PrintHiddenMessage(s,i,"Бот для управления и администрирования сервера Rimas Life")
+			printHiddenMessage(s,i,"Бот для управления и администрирования сервера Rimas Life")
 		},
 		"get-him": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			GetHim(s,i)
+			getHim(s,i)
 		},
 		"re-name-all": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			go GetHim(s,i)
+			go getHim(s,i)
 		},
 		"delete-undefined-users": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			if !IsDiscordAdmin(s, i.Member.User.ID) {
-				PrintHiddenMessage(s,i,"У вас нет доступа")
+			if !isDiscordAdmin(s, i.Member.User.ID) {
+				printHiddenMessage(s,i,"У вас нет доступа")
 				return
 			}
-			PrintHiddenMessage(s,i,"Удаляю всех неизвестных...")
-			DeleteUndefinedUsers()
+			printHiddenMessage(s,i,"Удаляю всех неизвестных...")
+			deleteUndefinedUsers()
 		},
 		"re-role": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			if !IsDiscordAdmin(s, i.Member.User.ID) {
+			if !isDiscordAdmin(s, i.Member.User.ID) {
 				return
 			}
-			PrintHiddenMessage(s,i,"Перепроверяю все роли...")
+			printHiddenMessage(s,i,"Перепроверяю все роли...")
 			go GiveRoles()
 			logger.PrintLog("reRole called")
 		},
@@ -87,27 +87,27 @@ var (
 			user := i.ApplicationCommandData().Options[0].UserValue(nil)
 			pid := user.ID
 			sender := i.Interaction.Member.User
-			if !IsDiscordAdmin(s, sender.ID) {
-				PrintHiddenMessage(s,i,"У вас нет доступа")
+			if !isDiscordAdmin(s, sender.ID) {
+				printHiddenMessage(s,i,"У вас нет доступа")
 				return
 			}
 			player, err := bd.GetUserByDS(pid)
 			if err != nil {
-				PrintHiddenMessage(s,i,"Пользователь не найден")
+				printHiddenMessage(s,i,"Пользователь не найден")
 				return
 			}
 			RenameUser(player.PlayerInfo.SteamId)
-			PrintHiddenMessage(s,i,"Запрос отправлен")
+			printHiddenMessage(s,i,"Запрос отправлен")
 		},
 		"give-boost": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			user := i.ApplicationCommandData().Options[0].UserValue(nil)
 			sender := i.Interaction.Member.User
-			if !IsDiscordAdmin(s, sender.ID) {
-				PrintHiddenMessage(s, i, "У вас нет доступа")
+			if !isDiscordAdmin(s, sender.ID) {
+				printHiddenMessage(s, i, "У вас нет доступа")
 				return
 			}
 			giveBoostPresent(i.ChannelID,user)
-			PrintHiddenMessage(s,i,"Запрос отправлен")
+			printHiddenMessage(s,i,"Запрос отправлен")
 		},
 	}
 )

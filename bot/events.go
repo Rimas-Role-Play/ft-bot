@@ -47,7 +47,7 @@ func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
 			return
 		}
 
-		if !IsDiscordAdmin(s, m.Author.ID ) {
+		if !isDiscordAdmin(s, m.Author.ID ) {
 			logger.PrintLog("%v попытался использовать!\n", m.Author)
 			return
 		}
