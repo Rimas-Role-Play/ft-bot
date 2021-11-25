@@ -7,7 +7,20 @@ import (
 )
 
 //-- Получить автомобили в продаже
-func GetVehiclePriceList() {
+func GetVehiclePriceList() store.PremiumVehicles {
+	var veh store.PremiumVehicles
+	rows, err := bd.Query("SELECT class, name, price, descr, images, sale from lk_secret_shop_price where section = 'vehicle'")
+	if err != nil {
+		logger.PrintLog("Vehicle Price Error: %v\n",err.Error())
+	}
+	defer rows.Close()
+	for rows.Next() {
+		if err := rows.Scan(&veh.Classname,&veh.Name,&veh.Price,&veh.Description,&veh.Images,&veh.Discount); err != nil {
+			logger.PrintLog("%v\n",err.Error())
+		}
+	}
+
+	return veh
 
 }
 

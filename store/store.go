@@ -23,7 +23,9 @@ type GroupRoles struct {
 // Vehicles
 type PremiumVehicles struct {
 	Classname 			string
+	Name				string
 	Images 				[]string
 	Description 		string
 	Price       		uint16
+	Discount			uint8
 }
