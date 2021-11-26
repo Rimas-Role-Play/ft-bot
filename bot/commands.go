@@ -13,6 +13,17 @@ var (
 			Description: "Бот для администрирования сервера Rimas, функционал доступен только администраторам",
 		},
 		{
+			Name: "help-boy",
+			Description: "Много ответов на много вопросов",
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+					Name:        "single",
+					Description: "Выберите вопрос",
+				},
+			},
+		},
+		{
 			Name: "delete-undefined-users",
 			Description: "Удаляет с базы неизвестных пользователей",
 		},
@@ -58,6 +69,9 @@ var (
 		},
 	}
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
+		"help-boy": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+			helpFaq(s,i)
+		},
 		"help": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			printHiddenMessage(s,i,"Бот для управления и администрирования сервера Rimas Life")
 		},

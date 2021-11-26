@@ -19,9 +19,7 @@ func GetVehiclePriceList() store.PremiumVehicles {
 			logger.PrintLog("%v\n",err.Error())
 		}
 	}
-
 	return veh
-
 }
 
 //-- Получаем очередь игроков на обновление
