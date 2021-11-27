@@ -21,7 +21,6 @@ var (
 // discord session
 var s *discordgo.Session
 
-
 // Starting database
 func Start() {
 	var err error
@@ -54,7 +53,6 @@ func Start() {
 
 	logger.PrintLog("Start goroutines")
 	StartRoutine()
-
 	stop := make(chan os.Signal)
 	signal.Notify(stop, os.Interrupt)
 	<-stop

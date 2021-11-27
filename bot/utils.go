@@ -28,7 +28,10 @@ func RenameUser(pid string) {
 
 // Check is discord admin
 func isDiscordAdmin(s *discordgo.Session, id string) bool {
-	g, _ := s.GuildMember(config.GuildId, id)
+	g, err := s.GuildMember(config.GuildId, id)
+	if err != nil {
+		return false
+	}
 	roles := g.Roles
 	for _, i := range config.GetAdminRoles() {
 		for _, y := range roles {
@@ -39,6 +42,24 @@ func isDiscordAdmin(s *discordgo.Session, id string) bool {
 		}
 	}
 	log.Println("Admin not found")
+	return false
+}
+
+// Check is user have Mute role
+func isMuted(s *discordgo.Session, id string) bool {
+	g, err := s.GuildMember(config.GuildId, id)
+	if err != nil {
+		return false
+	}
+	fmt.Println(g)
+	roles := g.Roles
+
+	for _, y := range roles {
+		if y == "875120846123962429" {
+			log.Println("User muted")
+			return true
+		}
+	}
 	return false
 }
 

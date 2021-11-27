@@ -40,6 +40,16 @@ func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
 	case discordgo.MessageTypeUserPremiumGuildSubscription:
 		bd.InsertMessageLog(m.ChannelID,m.ID,m.Author,m.Message.Type)
 		giveBoostPresent(m.ChannelID,m.Author)
+	case 0:
+		fallthrough
+	case 19:
+		if isMuted(s, m.Author.ID) {
+			err := s.ChannelMessageDelete(m.ChannelID,m.ID)
+			if err != nil {
+				logger.PrintLog(err.Error())
+			}
+			return
+		}
 	}
 
 	if strings.HasPrefix(m.Content, config.BotPrefix) {
