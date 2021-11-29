@@ -28,8 +28,8 @@ func ListenQueue() {
 	queue := bd.GetQueuePlayers()
 	for _, elem := range queue {
 		logger.PrintLog("%v in queue right now", elem)
-		RenameUser(elem)
-		GiveRole(elem)
+		renameUser(elem)
+		giveRole(elem)
 	}
 }
 

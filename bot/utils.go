@@ -12,11 +12,16 @@ import (
 var vipRoleId = "871508004795723787"
 var regRoleId = "864630308242849825"
 
-func RenameUser(pid string) {
+func renameUser(pid string) {
 	var err error
 	player, err := bd.GetPlayer(pid)
 	if err != nil {
 		logger.PrintLog(err.Error())
+		return
+	}
+	_, err = s.GuildMember(config.GuildId,pid)
+	if err != nil {
+		logger.PrintLog("User not found")
 		return
 	}
 	err = s.GuildMemberNickname(config.GuildId, player.PlayerInfo.DSUid, player.PlayerInfo.Name)

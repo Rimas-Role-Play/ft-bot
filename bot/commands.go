@@ -32,6 +32,10 @@ var (
 			Description: "Перепроверяет выданные роли",
 		},
 		{
+			Name: "re-name-all",
+			Description: "Переименовывает всех зарегистрированных",
+		},
+		{
 			Name:        "get-him",
 			Description: "Получить данные игрока",
 			Options: []*discordgo.ApplicationCommandOption{
@@ -79,6 +83,11 @@ var (
 			getHim(s,i)
 		},
 		"re-name-all": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+			if !isDiscordAdmin(s, i.Member.User.ID) {
+				printHiddenMessage(s,i,"У вас нет доступа")
+				return
+			}
+			printHiddenMessage(s,i,"Запрос отправлен...")
 			go getHim(s,i)
 		},
 		"delete-undefined-users": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
@@ -94,7 +103,7 @@ var (
 				return
 			}
 			printHiddenMessage(s,i,"Перепроверяю все роли...")
-			go GiveRoles()
+			go giveRoles()
 			logger.PrintLog("reRole called")
 		},
 		"re-name": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
@@ -110,7 +119,7 @@ var (
 				printHiddenMessage(s,i,"Пользователь не найден")
 				return
 			}
-			RenameUser(player.PlayerInfo.SteamId)
+			renameUser(player.PlayerInfo.SteamId)
 			printHiddenMessage(s,i,"Запрос отправлен")
 		},
 		"give-boost": func(s *discordgo.Session, i *discordgo.InteractionCreate) {

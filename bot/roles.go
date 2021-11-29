@@ -9,7 +9,7 @@ import (
 )
 
 
-func GiveRole(pid string) {
+func giveRole(pid string) {
 	player, err := bd.GetPlayer(pid)
 	if err != nil {
 		logger.PrintLog(err.Error())
@@ -20,7 +20,7 @@ func GiveRole(pid string) {
 
 
 // Giving roles
-func GiveRoles() {
+func giveRoles() {
 	var users []store.PlayerStats
 	users = bd.GetStatsPlayers()
 	for _, elem := range users {
@@ -30,6 +30,14 @@ func GiveRoles() {
 }
 
 func RoleAction(player store.PlayerStats) {
+
+	_, err := s.GuildMember(config.GuildId,player.PlayerInfo.DSUid)
+	if err != nil {
+		log.Println(err.Error())
+		log.Printf("User: %v will be deleted",player.PlayerInfo.Name)
+		bd.DeleteDiscordUser(player.PlayerInfo.DSUid)
+		return
+	}
 	groupRoles := bd.GetAllGroupsRole()
 	if !haveRole(player.PlayerInfo.DSUid, regRoleId) {
 		logger.PrintLog("Местный житель not found! %v",player.PlayerInfo.Name)
@@ -75,7 +83,13 @@ func RoleAction(player store.PlayerStats) {
 
 // Is have role
 func haveRole(id string, roleId string) bool {
-	member, _ := s.GuildMember(config.GuildId,id)
+	member, err := s.GuildMember(config.GuildId,id)
+	if err != nil {
+		log.Println(err.Error())
+		log.Printf("User: %v will be deleted",id)
+		bd.DeleteDiscordUser(id)
+		return false
+	}
 	for _, role := range member.Roles {
 		if role == roleId {
 			return true
@@ -83,6 +97,7 @@ func haveRole(id string, roleId string) bool {
 	}
 	return false
 }
+
 func setRole(guildId string, uid string, role string) bool {
 	_, err := s.GuildMember(guildId,uid)
 	if err != nil {
