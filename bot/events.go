@@ -16,7 +16,7 @@ func OnUserConnected(s *discordgo.Session, u *discordgo.GuildMemberAdd) {
 }
 
 // UserDisconnected event handler
-func OnUserDisconnected(s *discordgo.Session, u *discordgo.GuildMemberAdd) {
+func OnUserDisconnected(s *discordgo.Session, u *discordgo.GuildMemberRemove) {
 	user := u.Member.User
 	logger.PrintLog("User disconnected %v#%v | ID: %v",user.Username, user.Discriminator, user.ID )
 	bd.DeleteDiscordUser(user.ID)
