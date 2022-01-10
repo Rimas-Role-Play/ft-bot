@@ -9,6 +9,14 @@ import (
 	"time"
 )
 
+func init() {
+	err := ReadConfig()
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+}
+
 var (
 	Token     string
 	BotPrefix string
