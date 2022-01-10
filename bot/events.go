@@ -1,8 +1,8 @@
 package bot
 
 import (
-	"ft-bot/bd"
 	"ft-bot/config"
+	"ft-bot/db"
 	"ft-bot/logger"
 	"github.com/bwmarrin/discordgo"
 	"log"
@@ -12,24 +12,24 @@ import (
 // UserConnect event handler
 func OnUserConnected(s *discordgo.Session, u *discordgo.GuildMemberAdd) {
 	user := u.Member.User
-	logger.PrintLog("New user connected %v#%v | ID: %v",user.Username, user.Discriminator, user.ID )
+	logger.PrintLog("New user connected %v#%v | ID: %v", user.Username, user.Discriminator, user.ID)
 }
 
 // UserDisconnected event handler
 func OnUserDisconnected(s *discordgo.Session, u *discordgo.GuildMemberRemove) {
 	user := u.Member.User
-	logger.PrintLog("User disconnected %v#%v | ID: %v",user.Username, user.Discriminator, user.ID )
-	bd.DeleteDiscordUser(user.ID)
+	logger.PrintLog("User disconnected %v#%v | ID: %v", user.Username, user.Discriminator, user.ID)
+	db.DeleteDiscordUser(user.ID)
 }
 
 // UserBoosted event handler
-func OnUserChanged(s *discordgo.Session, i *discordgo.GuildMemberUpdate ) {}
+func OnUserChanged(s *discordgo.Session, i *discordgo.GuildMemberUpdate) {}
 
 // Messages event handler
 func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
 	switch m.Message.Type {
 	case 7:
-		bd.InsertMessageLog(m.ChannelID,m.ID,m.Author,m.Message.Type)
+		db.InsertMessageLog(m.ChannelID, m.ID, m.Author, m.Message.Type)
 
 	case discordgo.MessageTypeUserPremiumGuildSubscriptionTierOne:
 		fallthrough
@@ -38,13 +38,13 @@ func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
 	case discordgo.MessageTypeUserPremiumGuildSubscriptionTierThree:
 		fallthrough
 	case discordgo.MessageTypeUserPremiumGuildSubscription:
-		bd.InsertMessageLog(m.ChannelID,m.ID,m.Author,m.Message.Type)
-		giveBoostPresent(m.ChannelID,m.Author)
+		db.InsertMessageLog(m.ChannelID, m.ID, m.Author, m.Message.Type)
+		giveBoostPresent(m.ChannelID, m.Author)
 	case 0:
 		fallthrough
 	case 19:
 		if isMuted(s, m.Author.ID) {
-			err := s.ChannelMessageDelete(m.ChannelID,m.ID)
+			err := s.ChannelMessageDelete(m.ChannelID, m.ID)
 			if err != nil {
 				logger.PrintLog(err.Error())
 			}
@@ -57,7 +57,7 @@ func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
 			return
 		}
 
-		if !isDiscordAdmin(s, m.Author.ID ) {
+		if !isDiscordAdmin(s, m.Author.ID) {
 			logger.PrintLog("%v попытался использовать!\n", m.Author)
 			return
 		}
@@ -68,7 +68,7 @@ func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
 		for idx := range inputSplit {
 			if idx == 0 {
 				content = inputSplit[idx]
-			}else{
+			} else {
 				vars = append(vars, inputSplit[idx])
 			}
 		}

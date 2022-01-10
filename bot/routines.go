@@ -1,7 +1,7 @@
 package bot
 
 import (
-	"ft-bot/bd"
+	"ft-bot/db"
 	"ft-bot/logger"
 	"time"
 )
@@ -13,9 +13,9 @@ func StartRoutine() {
 	go func() {
 		for {
 			select {
-			case <- ticker.C:
+			case <-ticker.C:
 				ListenQueue()
-			case <- quit:
+			case <-quit:
 				ticker.Stop()
 				return
 			}
@@ -25,11 +25,10 @@ func StartRoutine() {
 
 // Listener of discord_queue
 func ListenQueue() {
-	queue := bd.GetQueuePlayers()
+	queue := db.GetQueuePlayers()
 	for _, elem := range queue {
 		logger.PrintLog("%v in queue right now", elem)
 		renameUser(elem)
 		giveRole(elem)
 	}
 }
-

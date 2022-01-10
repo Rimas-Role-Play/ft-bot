@@ -1,4 +1,4 @@
-package bd
+package db
 
 import (
 	"database/sql"
@@ -7,18 +7,26 @@ import (
 	"ft-bot/logger"
 )
 
-// Global variable in bd package
-var bd *sql.DB
+// Global variable in db package
+var db *sql.DB
+
+func init() {
+	var err error
+	db, err = connectDatabase()
+	if err != nil {
+		logger.PrintLog("cant open database %s\n", err.Error())
+	}
+	logger.PrintLog("Database connected")
+}
 
 // Connect to database
-func ConnectDatabase() (*sql.DB, error) {
+func connectDatabase() (*sql.DB, error) {
 	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
 		config.User,
 		config.Password,
 		config.IpDatabase,
 		config.Port,
 		config.Database))
-	bd = db
 	if err != nil {
 		logger.PrintLog("Database not connected\n")
 		return nil, err
@@ -41,5 +49,5 @@ func ConnectDatabase() (*sql.DB, error) {
 		rows.Scan(&title)
 		logger.PrintLog("Database version: %v\n", title)
 	}
-	return bd, nil
+	return db, nil
 }

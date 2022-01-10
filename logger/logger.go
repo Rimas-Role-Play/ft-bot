@@ -6,10 +6,10 @@ import (
 	"path/filepath"
 )
 
-var(
+var (
 	tempDir string
 	logFile *os.File
-	loger *log.Logger
+	loger   *log.Logger
 )
 
 func init() {
@@ -19,7 +19,7 @@ func init() {
 
 func PrintLog(format string, v ...interface{}) {
 	log.Printf(format, v...)
-	loger.Printf(format,v...)
+	loger.Printf(format, v...)
 }
 
 func SetupLogger() *log.Logger {

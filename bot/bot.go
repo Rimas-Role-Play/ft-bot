@@ -15,7 +15,7 @@ var (
 	GuildID        = flag.String("guild", config.GuildId, "Test guild ID. If not passed - bot registers commands globally")
 	BotToken       = flag.String("token", config.Token, "Bot access token")
 	RemoveCommands = flag.Bool("rmcmd", true, "Remove all commands after shutdowning or not")
-	Lg *log.Logger
+	Lg             *log.Logger
 )
 
 // discord session
@@ -39,7 +39,8 @@ func Start() {
 	s.AddHandler(OnUserDisconnected)
 	s.AddHandler(OnReactMessage)
 	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
-		logger.PrintLog("Bot is up!")})
+		logger.PrintLog("Bot is up!")
+	})
 
 	err = s.Open()
 	if err != nil {
@@ -71,10 +72,10 @@ func AddRemoveCommands() {
 	for _, elem := range cmd {
 		err := s.ApplicationCommandDelete(s.State.User.ID, *GuildID, elem.ID)
 		if err != nil {
-			logger.PrintLog("Cant delete command %v",elem.Name)
+			logger.PrintLog("Cant delete command %v", elem.Name)
 			logger.PrintLog(err.Error())
-		}else{
-			logger.PrintLog("Command %v deleted",elem.Name)
+		} else {
+			logger.PrintLog("Command %v deleted", elem.Name)
 		}
 	}
 

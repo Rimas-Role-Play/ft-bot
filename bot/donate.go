@@ -4,5 +4,5 @@ func getListPrices() {
 
 }
 func printListPrices() {}
-func askToBuy() {}
-func confirmBuy() {}
+func askToBuy()        {}
+func confirmBuy()      {}

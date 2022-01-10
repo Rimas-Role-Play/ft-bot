@@ -1,7 +1,7 @@
 package bot
 
 import (
-	"ft-bot/bd"
+	"ft-bot/db"
 	"ft-bot/logger"
 	"github.com/bwmarrin/discordgo"
 )
@@ -9,11 +9,11 @@ import (
 var (
 	commands = []*discordgo.ApplicationCommand{
 		{
-			Name: "help",
+			Name:        "help",
 			Description: "Бот для администрирования сервера Rimas, функционал доступен только администраторам",
 		},
 		{
-			Name: "help-boy",
+			Name:        "help-boy",
 			Description: "Много ответов на много вопросов",
 			Options: []*discordgo.ApplicationCommandOption{
 				{
@@ -24,15 +24,15 @@ var (
 			},
 		},
 		{
-			Name: "delete-undefined-users",
+			Name:        "delete-undefined-users",
 			Description: "Удаляет с базы неизвестных пользователей",
 		},
 		{
-			Name: "re-role",
+			Name:        "re-role",
 			Description: "Перепроверяет выданные роли",
 		},
 		{
-			Name: "re-name-all",
+			Name:        "re-name-all",
 			Description: "Переименовывает всех зарегистрированных",
 		},
 		{
@@ -74,35 +74,35 @@ var (
 	}
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
 		"help-boy": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			helpFaq(s,i)
+			helpFaq(s, i)
 		},
 		"help": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			printHiddenMessage(s,i,"Бот для управления и администрирования сервера Rimas Life")
+			printHiddenMessage(s, i, "Бот для управления и администрирования сервера Rimas Life")
 		},
 		"get-him": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			getHim(s,i)
+			getHim(s, i)
 		},
 		"re-name-all": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			if !isDiscordAdmin(s, i.Member.User.ID) {
-				printHiddenMessage(s,i,"У вас нет доступа")
+				printHiddenMessage(s, i, "У вас нет доступа")
 				return
 			}
-			printHiddenMessage(s,i,"Запрос отправлен...")
-			go getHim(s,i)
+			printHiddenMessage(s, i, "Запрос отправлен...")
+			go getHim(s, i)
 		},
 		"delete-undefined-users": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			if !isDiscordAdmin(s, i.Member.User.ID) {
-				printHiddenMessage(s,i,"У вас нет доступа")
+				printHiddenMessage(s, i, "У вас нет доступа")
 				return
 			}
-			printHiddenMessage(s,i,"Удаляю всех неизвестных...")
+			printHiddenMessage(s, i, "Удаляю всех неизвестных...")
 			deleteUndefinedUsers()
 		},
 		"re-role": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			if !isDiscordAdmin(s, i.Member.User.ID) {
 				return
 			}
-			printHiddenMessage(s,i,"Перепроверяю все роли...")
+			printHiddenMessage(s, i, "Перепроверяю все роли...")
 			go giveRoles()
 			logger.PrintLog("reRole called")
 		},
@@ -111,16 +111,16 @@ var (
 			pid := user.ID
 			sender := i.Interaction.Member.User
 			if !isDiscordAdmin(s, sender.ID) {
-				printHiddenMessage(s,i,"У вас нет доступа")
+				printHiddenMessage(s, i, "У вас нет доступа")
 				return
 			}
-			player, err := bd.GetUserByDS(pid)
+			player, err := db.GetUserByDS(pid)
 			if err != nil {
-				printHiddenMessage(s,i,"Пользователь не найден")
+				printHiddenMessage(s, i, "Пользователь не найден")
 				return
 			}
 			renameUser(player.PlayerInfo.SteamId)
-			printHiddenMessage(s,i,"Запрос отправлен")
+			printHiddenMessage(s, i, "Запрос отправлен")
 		},
 		"give-boost": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			user := i.ApplicationCommandData().Options[0].UserValue(nil)
@@ -129,8 +129,8 @@ var (
 				printHiddenMessage(s, i, "У вас нет доступа")
 				return
 			}
-			giveBoostPresent(i.ChannelID,user)
-			printHiddenMessage(s,i,"Запрос отправлен")
+			giveBoostPresent(i.ChannelID, user)
+			printHiddenMessage(s, i, "Запрос отправлен")
 		},
 	}
 )
