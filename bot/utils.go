@@ -147,6 +147,31 @@ func createEmbedNitroBooster(vehicle config.Vehicles) *discordgo.MessageEmbed {
 	}
 	return embed
 }
+
+func cleanMessageInChannel(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	channel := i.ApplicationCommandData().Options[0].ChannelValue(s)
+	for {
+		msgs, err := s.ChannelMessages(channel.ID, 100, "", "", "")
+		if err != nil {
+			logger.PrintLog("cant find all messages \n")
+			return
+		}
+		fmt.Printf("find %d messages\n", len(msgs))
+		for idx, msg := range msgs {
+			if err := s.ChannelMessageDelete(channel.ID, msg.ID); err != nil {
+				fmt.Printf("cant delete message: %s\n", err.Error())
+			}
+			fmt.Printf("message idx %d deleted\n", idx)
+		}
+		if len(msgs) != 100 {
+			break
+		}
+	}
+	printHiddenMessage(s, i, "все сообщения удалены")
+	fmt.Printf("all messages deleted\n")
+
+}
+
 func pingUser(id string) string {
 	return fmt.Sprintf("<@%v>", id)
 }

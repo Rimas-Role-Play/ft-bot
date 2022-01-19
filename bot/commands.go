@@ -13,6 +13,24 @@ var (
 			Description: "Бот для администрирования сервера Rimas, функционал доступен только администраторам",
 		},
 		{
+			Name:        "copy-role",
+			Description: "Скопирвать роль",
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionRole,
+					Name:        "role-option",
+					Description: "Выберите роль",
+					Required:    true,
+				},
+				{
+					Type:        discordgo.ApplicationCommandOptionString,
+					Name:        "role-name",
+					Description: "Установите имя для новой роли",
+					Required:    true,
+				},
+			},
+		},
+		{
 			Name:        "help-boy",
 			Description: "Много ответов на много вопросов",
 			Options: []*discordgo.ApplicationCommandOption{
@@ -71,10 +89,35 @@ var (
 				},
 			},
 		},
+		{
+			Name:        "clean-channel",
+			Description: "Удалить все сообщения в канале",
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Type:        discordgo.ApplicationCommandOptionChannel,
+					Name:        "channel-option",
+					Description: "Channel option",
+					Required:    true,
+				},
+			},
+		},
 	}
 	commandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
+		"copy-role": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+			if !isDiscordAdmin(s, i.Member.User.ID) {
+				return
+			}
+			copyRole(s, i)
+		},
 		"help-boy": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			helpFaq(s, i)
+		},
+		"clean-channel": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+			if !isDiscordAdmin(s, i.Member.User.ID) {
+				return
+			}
+			go cleanMessageInChannel(s, i)
+			return
 		},
 		"help": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			printHiddenMessage(s, i, "Бот для управления и администрирования сервера Rimas Life")

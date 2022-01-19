@@ -1,12 +1,50 @@
 package bot
 
 import (
+	"fmt"
 	"ft-bot/config"
 	"ft-bot/db"
 	"ft-bot/logger"
 	"ft-bot/store"
+	"github.com/bwmarrin/discordgo"
 	"log"
 )
+
+func findRoleById(guildId, roleId string) (*discordgo.Role, error) {
+	roles, err := s.GuildRoles(guildId)
+	if err != nil {
+		return &discordgo.Role{}, err
+	}
+	for _, elem := range roles {
+		if elem.ID == roleId {
+			return elem, nil
+		}
+	}
+	return &discordgo.Role{}, fmt.Errorf("role not found")
+}
+
+func copyRole(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	roleId := i.ApplicationCommandData().Options[0].RoleValue(s, "").ID
+	role, err := findRoleById(config.GuildId, roleId)
+	if err != nil {
+		printHiddenMessage(s, i, "ошибка при создании роли "+err.Error())
+		return
+	}
+	nameNewRole := i.ApplicationCommandData().Options[1].StringValue()
+	newRole, err := s.GuildRoleCreate(config.GuildId)
+	if err != nil {
+		printHiddenMessage(s, i, "ошибка при создании роли "+err.Error())
+		return
+	}
+	fmt.Println(config.GuildId, role.ID, role.Name, role.Color, role.Hoist, role.Permissions, role.Mentionable)
+	fmt.Println(config.GuildId, newRole.ID, nameNewRole, role.Color, role.Hoist, role.Permissions, role.Mentionable)
+	newRole, err = s.GuildRoleEdit(config.GuildId, newRole.ID, nameNewRole, role.Color, role.Hoist, role.Permissions, role.Mentionable)
+	if err != nil {
+		printHiddenMessage(s, i, "ошибка при изменении роли "+err.Error())
+		return
+	}
+	printHiddenMessage(s, i, "Роль "+role.Mention()+" скопирована в "+newRole.Mention())
+}
 
 func giveRole(pid string) {
 	player, err := db.GetPlayer(pid)
