@@ -1,7 +1,6 @@
 package bot
 
 import (
-	"flag"
 	"ft-bot/config"
 	"ft-bot/logger"
 	"github.com/bwmarrin/discordgo"
@@ -12,10 +11,7 @@ import (
 )
 
 var (
-	GuildID        = flag.String("guild", config.GuildId, "Test guild ID. If not passed - bot registers commands globally")
-	BotToken       = flag.String("token", config.Token, "Bot access token")
-	RemoveCommands = flag.Bool("rmcmd", true, "Remove all commands after shutdowning or not")
-	Lg             *log.Logger
+	Lg *log.Logger
 )
 
 // discord session
@@ -50,7 +46,10 @@ func Start() {
 	defer s.Close()
 
 	// Удаляем и тут же их добавляем, потому что дискорд принимает изменения очень долго
-	AddRemoveCommands()
+	for _, elem := range s.State.Guilds {
+		log.Printf("Guild: %s\n", elem.ID)
+		AddRemoveCommands(elem.ID)
+	}
 
 	logger.PrintLog("Start goroutines")
 	StartRoutine()
@@ -61,32 +60,33 @@ func Start() {
 }
 
 // Add commands to bot
-func AddRemoveCommands() {
+func AddRemoveCommands(guildId string) {
 	logger.PrintLog("Init commands...")
 
-	cmd, err := s.ApplicationCommands(s.State.User.ID, *GuildID)
+	cmd, err := s.ApplicationCommands(s.State.User.ID, guildId)
 	if err != nil {
 		logger.PrintLog(err.Error())
 	}
 
-	for _, elem := range cmd {
-		err := s.ApplicationCommandDelete(s.State.User.ID, *GuildID, elem.ID)
-		if err != nil {
-			logger.PrintLog("Cant delete command %v", elem.Name)
-			logger.PrintLog(err.Error())
-		} else {
-			logger.PrintLog("Command %v deleted", elem.Name)
-		}
-	}
-
+	insert := true
 	for _, v := range commands {
-		_, err := s.ApplicationCommandCreate(s.State.User.ID, *GuildID, v)
+		for _, elem := range cmd {
+			if elem == v {
+				insert = false
+				break
+			}
+		}
+		if !insert {
+			continue
+		}
+		_, err := s.ApplicationCommandCreate(s.State.User.ID, guildId, v)
 		if err != nil {
 			logger.PrintLog("Cannot create '%v' command: %v", v.Name, err)
 		}
 		logger.PrintLog("Command %v created", v.Name)
+
 	}
-	s.ApplicationCommandBulkOverwrite(s.State.User.ID, *GuildID, commands)
+	s.ApplicationCommandBulkOverwrite(s.State.User.ID, guildId, commands)
 
 	logger.PrintLog("Init commands finished")
 }
