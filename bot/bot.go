@@ -48,7 +48,7 @@ func Start() {
 	// Удаляем и тут же их добавляем, потому что дискорд принимает изменения очень долго
 	for _, elem := range s.State.Guilds {
 		log.Printf("Guild: %s\n", elem.ID)
-		AddRemoveCommands(elem.ID)
+		addRemoveCommands(elem.ID)
 	}
 
 	logger.PrintLog("Start goroutines")
