@@ -31,15 +31,8 @@ var (
 			},
 		},
 		{
-			Name:        "help-boy",
+			Name:        "help-player",
 			Description: "Много ответов на много вопросов",
-			Options: []*discordgo.ApplicationCommandOption{
-				{
-					Type:        discordgo.ApplicationCommandOptionSubCommand,
-					Name:        "single",
-					Description: "Выберите вопрос",
-				},
-			},
 		},
 		{
 			Name:        "delete-undefined-users",
@@ -109,8 +102,8 @@ var (
 			}
 			copyRole(s, i)
 		},
-		"help-boy": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			helpFaq(s, i)
+		"help-player": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+			printHelp(s, i)
 		},
 		"clean-channel": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			if !isDiscordAdmin(s, i.Member.User.ID) {
