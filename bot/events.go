@@ -10,23 +10,23 @@ import (
 )
 
 // UserConnect event handler
-func OnUserConnected(s *discordgo.Session, u *discordgo.GuildMemberAdd) {
+func onUserConnected(s *discordgo.Session, u *discordgo.GuildMemberAdd) {
 	user := u.Member.User
 	logger.PrintLog("New user connected %v#%v | ID: %v", user.Username, user.Discriminator, user.ID)
 }
 
 // UserDisconnected event handler
-func OnUserDisconnected(s *discordgo.Session, u *discordgo.GuildMemberRemove) {
+func onUserDisconnected(s *discordgo.Session, u *discordgo.GuildMemberRemove) {
 	user := u.Member.User
 	logger.PrintLog("User disconnected %v#%v | ID: %v", user.Username, user.Discriminator, user.ID)
 	db.DeleteDiscordUser(user.ID)
 }
 
 // UserBoosted event handler
-func OnUserChanged(s *discordgo.Session, i *discordgo.GuildMemberUpdate) {}
+func onUserChanged(s *discordgo.Session, i *discordgo.GuildMemberUpdate) {}
 
 // Messages event handler
-func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
+func onMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
 	switch m.Message.Type {
 	case 7:
 		db.InsertMessageLog(m.ChannelID, m.ID, m.Author, m.Message.Type)
@@ -80,14 +80,29 @@ func OnMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
 }
 
 // Command trigger event handler
-func OnCommandsCall(s *discordgo.Session, i *discordgo.InteractionCreate) {
-	if h, ok := commandHandlers[i.ApplicationCommandData().Name]; ok {
-		h(s, i)
-		logger.PrintLog("Command %v called\n", i.ApplicationCommandData().Name)
+func onCommandsCall(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	switch i.Type {
+	case discordgo.InteractionApplicationCommand:
+		if h, ok := commandHandlers[i.ApplicationCommandData().Name]; ok {
+			h(s, i)
+		}
+		if h, ok := helpCommands[i.ApplicationCommandData().Name]; ok {
+			h(s, i)
+		}
+		/*
+			if h, ok := ticketCommands[i.ApplicationCommandData().Name]; ok {
+				h(s, i)
+			}
+		*/
+	case discordgo.InteractionMessageComponent:
+
+		if h, ok := componentsHandlers[i.MessageComponentData().CustomID]; ok {
+			h(s, i)
+		}
 	}
 }
 
 // Reaction trigger
-func OnReactMessage(s *discordgo.Session, i *discordgo.MessageReactionAdd) {
+func onReactMessage(s *discordgo.Session, i *discordgo.MessageReactionAdd) {
 	log.Println(i)
 }

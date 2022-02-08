@@ -28,12 +28,12 @@ func Start() {
 	}
 
 	s.Identify.Intents = discordgo.MakeIntent(discordgo.IntentsAll)
-	s.AddHandler(OnUserChanged)
-	s.AddHandler(OnMessageHandle)
-	s.AddHandler(OnCommandsCall)
-	s.AddHandler(OnUserConnected)
-	s.AddHandler(OnUserDisconnected)
-	s.AddHandler(OnReactMessage)
+	s.AddHandler(onUserChanged)
+	s.AddHandler(onMessageHandle)
+	s.AddHandler(onCommandsCall)
+	s.AddHandler(onUserConnected)
+	s.AddHandler(onUserDisconnected)
+	s.AddHandler(onReactMessage)
 	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
 		logger.PrintLog("Bot is up!")
 	})
@@ -60,7 +60,7 @@ func Start() {
 }
 
 // Add commands to bot
-func AddRemoveCommands(guildId string) {
+func addRemoveCommands(guildId string) {
 	logger.PrintLog("Init commands...")
 
 	cmd, err := s.ApplicationCommands(s.State.User.ID, guildId)
