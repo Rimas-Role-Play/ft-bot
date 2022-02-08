@@ -125,6 +125,18 @@ func giveBoostPresent(channelId string, user *discordgo.User) {
 	s.ChannelMessageSendEmbed(channelId, createEmbedNitroBooster(vehicle))
 	logger.PrintLog("%v boosted server and given %v", user.Username, vehicle.DisplayName)
 }
+
+func generateEmbed(text string, title string, url string) *discordgo.MessageEmbed {
+	embed := &discordgo.MessageEmbed{
+		URL:         url,
+		Type:        discordgo.EmbedTypeLink,
+		Title:       title,
+		Description: text,
+		Color:       0x423D4F,
+	}
+	return embed
+}
+
 func createEmbedNitroBooster(vehicle config.Vehicles) *discordgo.MessageEmbed {
 	embed := &discordgo.MessageEmbed{
 		URL:         "",
