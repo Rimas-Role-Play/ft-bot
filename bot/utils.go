@@ -5,6 +5,7 @@ import (
 	"ft-bot/config"
 	"ft-bot/db"
 	"ft-bot/logger"
+	"ft-bot/store"
 	"github.com/bwmarrin/discordgo"
 	"log"
 )
@@ -119,7 +120,7 @@ func giveBoostPresent(channelId string, user *discordgo.User) {
 		s.ChannelMessageSend(channelId, "Мы не нашли ваш аккаунт на сервере, привяжите ваш аккаунт и напишите администрации за получением бонуса")
 		return
 	}
-	vehicle := config.GetRandomVehicle()
+	vehicle := db.GetRandomVehicle()
 	db.InsertVehicle(vehicle.Classname, player.PlayerInfo.SteamId)
 	s.ChannelMessageSend(channelId, pingUser(user.ID))
 	s.ChannelMessageSendEmbed(channelId, createEmbedNitroBooster(vehicle))
@@ -137,7 +138,7 @@ func generateEmbed(text string, title string, url string) *discordgo.MessageEmbe
 	return embed
 }
 
-func createEmbedNitroBooster(vehicle config.Vehicles) *discordgo.MessageEmbed {
+func createEmbedNitroBooster(vehicle *store.Vehicles) *discordgo.MessageEmbed {
 	embed := &discordgo.MessageEmbed{
 		URL:         "",
 		Type:        discordgo.EmbedTypeImage,

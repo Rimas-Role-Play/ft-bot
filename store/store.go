@@ -29,3 +29,9 @@ type PremiumVehicles struct {
 	Price       uint16
 	Discount    uint8
 }
+
+type Vehicles struct {
+	Classname   string
+	Image       string
+	DisplayName string
+}

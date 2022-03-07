@@ -258,5 +258,26 @@ func GetPlayerStr(pid string) (string, bool) {
 	if len(plr.SteamId) == 0 {
 		return "Никто не найден", false
 	}
-	return fmt.Sprintf("Игрок: %v\nID: %d\nPID: %v\nДонат уровень: %d ур.\nRC: %d\n", plr.Name, plr.Uid, plr.SteamId, plr.DonatLevel, plr.RC), true
+	return fmt.Sprintf("Имя профиля: %v\nИмя: %s\nID: %d\nPID: %v\nДонат уровень: %d ур.\nRC: %d\n", plr.Name, plr.Names, plr.Uid, plr.SteamId, plr.DonatLevel, plr.RC), true
+}
+
+func GetRandomVehicle() *store.Vehicles {
+	var veh store.Vehicles
+	rows, err := db.Query("SELECT d.classname, d.image, m.displayName FROM discord_boosters d " +
+		"INNER JOIN lk_mapobjects m ON m.classname = d.classname " +
+		"WHERE active = 1 " +
+		"ORDER BY RAND() " +
+		"LIMIT 1")
+	if err != nil {
+		logger.PrintLog("GetRandomVehicle Error: %s\n", err.Error())
+		return nil
+	}
+	defer rows.Close()
+	for rows.Next() {
+		if err := rows.Scan(&veh.Classname, &veh.Image, &veh.DisplayName); err != nil {
+			logger.PrintLog("GetRandomVehicle Error: %s\n", err.Error())
+			return nil
+		}
+	}
+	return &veh
 }
