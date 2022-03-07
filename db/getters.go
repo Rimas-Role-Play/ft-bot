@@ -237,12 +237,17 @@ func GetPlayerStr(pid string) (string, bool) {
 		Uid        uint32
 		SteamId    string
 		Name       string
+		Names      string
 		DonatLevel uint8
 		RC         uint32
 	}
 	var plr Player
 
-	rows, err := db.Query("select p.uid, p.playerid, p.name, p.donorlevel, p.EPoint from players p inner join discord_users du on p.playerid = du.uid inner join player_hardwares ph on p.playerid = ph.uid where ph.discord_id = ? or du.discord_uid = ?", pid, pid)
+	rows, err := db.Query(`select p.uid, p.playerid, p.name, CONCAT(p.first_name," \"", p.nick_name, "\" ", p.last_name), p.donorlevel, p.EPoint `+
+		"from players p "+
+		"left join discord_users du on p.playerid = du.uid "+
+		"right join player_hardwares ph on p.playerid = ph.uid "+
+		"where ph.discord_id = ? or du.discord_uid = ?", pid, pid)
 	if err != nil {
 		logger.PrintLog("GetPlayer Error: %v", err.Error())
 		return err.Error(), false
@@ -250,7 +255,7 @@ func GetPlayerStr(pid string) (string, bool) {
 	defer rows.Close()
 
 	for rows.Next() {
-		if err := rows.Scan(&plr.Uid, &plr.SteamId, &plr.Name, &plr.DonatLevel, &plr.RC); err != nil {
+		if err := rows.Scan(&plr.Uid, &plr.SteamId, &plr.Name, &plr.Names, &plr.DonatLevel, &plr.RC); err != nil {
 			logger.PrintLog("GetPlayer Error: %v", err.Error())
 			return err.Error(), false
 		}
