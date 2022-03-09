@@ -10,10 +10,11 @@ import (
 func GetVehiclePriceList() store.PremiumVehicles {
 	var veh store.PremiumVehicles
 	rows, err := db.Query("SELECT class, name, price, descr, images, sale from lk_secret_shop_price where section = 'vehicle'")
+	defer rows.Close()
+
 	if err != nil {
 		logger.PrintLog("Vehicle Price Error: %v\n", err.Error())
 	}
-	defer rows.Close()
 	for rows.Next() {
 		if err := rows.Scan(&veh.Classname, &veh.Name, &veh.Price, &veh.Description, &veh.Images, &veh.Discount); err != nil {
 			logger.PrintLog("%v\n", err.Error())
@@ -26,11 +27,12 @@ func GetVehiclePriceList() store.PremiumVehicles {
 func GetQueuePlayers() []string {
 	var queue []string
 	rows, err := db.Query("SELECT uid FROM discord_queue")
+	defer rows.Close()
+
 	if err != nil {
 		logger.PrintLog("Queue Error: %v", err.Error())
 		return queue
 	}
-	defer rows.Close()
 	var uid string
 	for rows.Next() {
 		if err := rows.Scan(&uid); err != nil {
@@ -48,14 +50,15 @@ func GetQueuePlayers() []string {
 //-- Получить данные определенного игрока в структуре
 func GetPlayer(pid string) (store.PlayerStats, error) {
 	var player store.PlayerStats
-	rows, err := db.Query("select du.discord_uid, p.uid, p.playerid, p.name from players p inner join discord_users du on p.playerid = du.uid inner join player_hardwares ph on p.playerid = ph.uid where p.playerid = ?", pid)
+	rows, err := db.Query(`select du.discord_uid, p.uid, p.playerid, p.name, CONCAT(p.first_name," \"", p.nick_name, "\" ", p.last_name) from players p inner join discord_users du on p.playerid = du.uid inner join player_hardwares ph on p.playerid = ph.uid where p.playerid = ?`, pid)
+	defer rows.Close()
+
 	if err != nil {
 		logger.PrintLog(err.Error())
 		return player, err
 	}
-	defer rows.Close()
 	for rows.Next() {
-		if err := rows.Scan(&player.PlayerInfo.DSUid, &player.PlayerInfo.Uid, &player.PlayerInfo.SteamId, &player.PlayerInfo.Name); err != nil {
+		if err := rows.Scan(&player.PlayerInfo.DSUid, &player.PlayerInfo.Uid, &player.PlayerInfo.SteamId, &player.PlayerInfo.Name, &player.PlayerInfo.Names); err != nil {
 			logger.PrintLog(err.Error())
 		}
 	}
@@ -64,11 +67,12 @@ func GetPlayer(pid string) (store.PlayerStats, error) {
 		return store.PlayerStats{}, fmt.Errorf("nothing")
 	}
 	rows, err = db.Query("SELECT group_id, donorlevel from players where playerid = ?", pid)
+	defer rows.Close()
+
 	if err != nil {
 		logger.PrintLog(err.Error())
 		return player, err
 	}
-	defer rows.Close()
 
 	for rows.Next() {
 		if err := rows.Scan(&player.GroupId, &player.DonatLevel); err != nil {
@@ -85,6 +89,7 @@ func GetStatsPlayers() []store.PlayerStats {
 	var players []store.PlayerStats
 	for _, elem := range allPlayers {
 		rows, err := db.Query("select group_id, donorlevel from players where playerid = ?", elem.SteamId)
+		defer rows.Close()
 		if err != nil {
 			logger.PrintLog("GetStats Error: %v", err.Error())
 		}
@@ -102,11 +107,12 @@ func GetStatsPlayers() []store.PlayerStats {
 func GetUserByDS(pid string) (store.PlayerStats, error) {
 	var player store.PlayerStats
 	rows, err := db.Query("select du.discord_uid, p.uid, p.playerid, p.name from players p inner join discord_users du on p.playerid = du.uid inner join player_hardwares ph on p.playerid = ph.uid where du.discord_uid = ? or ph.discord_id = ?", pid, pid)
+	defer rows.Close()
+
 	if err != nil {
 		logger.PrintLog(err.Error())
 		return player, err
 	}
-	defer rows.Close()
 	for rows.Next() {
 		if err := rows.Scan(&player.PlayerInfo.DSUid, &player.PlayerInfo.Uid, &player.PlayerInfo.SteamId, &player.PlayerInfo.Name); err != nil {
 			logger.PrintLog(err.Error())
@@ -117,11 +123,12 @@ func GetUserByDS(pid string) (store.PlayerStats, error) {
 		return store.PlayerStats{}, fmt.Errorf("nothing")
 	}
 	rows, err = db.Query("SELECT group_id, donorlevel from players where playerid = ?", player.PlayerInfo.SteamId)
+	defer rows.Close()
+
 	if err != nil {
 		logger.PrintLog(err.Error())
 		return player, err
 	}
-	defer rows.Close()
 
 	for rows.Next() {
 		if err := rows.Scan(&player.GroupId, &player.DonatLevel); err != nil {
@@ -138,10 +145,11 @@ func GetGroupsRole(id int8) (string, string) {
 		return "", ""
 	}
 	rows, err := db.Query("SELECT id, ds_role_leader, ds_role_member_id FROM groups WHERE id = ?", id)
+	defer rows.Close()
+
 	if err != nil {
 		logger.PrintLog("GetGroup Error: %v", err.Error())
 	}
-	defer rows.Close()
 	var groupId uint8
 	var dsRoleLeader, dsRoleMember string
 	for rows.Next() {
@@ -156,10 +164,11 @@ func GetGroupsRole(id int8) (string, string) {
 //-- Получить id всех ролей организации
 func GetAllGroupsRole() []string {
 	rows, err := db.Query("SELECT ds_role_leader, ds_role_member_id FROM groups")
+	defer rows.Close()
+
 	if err != nil {
 		logger.PrintLog("GetAllGroup Error: %v", err.Error())
 	}
-	defer rows.Close()
 	var roles []string
 	var dsRoleLeader, dsRoleMember string
 	for rows.Next() {
@@ -175,11 +184,12 @@ func GetAllGroupsRole() []string {
 func IsLeaderGroup(id int8, steamId string) bool {
 	var owner, leader string
 	rows, err := db.Query("SELECT creator, leader FROM `groups` where id = ?", id)
+	defer rows.Close()
+
 	if err != nil {
 		logger.PrintLog("IsLeader Error: %v", err.Error())
 		return false
 	}
-	defer rows.Close()
 	for rows.Next() {
 		if err := rows.Scan(&owner, &leader); err != nil {
 			logger.PrintLog("IsLeader Error: %v", err.Error())
@@ -196,10 +206,11 @@ func IsLeaderGroup(id int8, steamId string) bool {
 func GetAllDiscordUids() []string {
 	var uids []string
 	rows, err := db.Query("select discord_uid from discord_users")
+	defer rows.Close()
+
 	if err != nil {
 		return uids
 	}
-	defer rows.Close()
 	var uid string
 	for rows.Next() {
 		if err := rows.Scan(&uid); err != nil {
@@ -213,12 +224,13 @@ func GetAllDiscordUids() []string {
 //-- Получить всех кто зарегистрирован вольно и невольно
 func GetAllRegisteredPlayers() []store.Player {
 	rows, err := db.Query("select du.discord_uid, p.uid, p.playerid, p.name from players p inner join discord_users du on p.playerid = du.uid inner join player_hardwares ph on p.playerid = ph.uid")
+	defer rows.Close()
+
 	var plr []store.Player
 	if err != nil {
 		logger.PrintLog("AllRegistered Error: %v", err.Error())
 		return plr
 	}
-	defer rows.Close()
 
 	var Uid uint32
 	var DSUid, SteamId, Name string
@@ -248,11 +260,11 @@ func GetPlayerStr(pid string) (string, bool) {
 		"left join discord_users du on p.playerid = du.uid "+
 		"right join player_hardwares ph on p.playerid = ph.uid "+
 		"where ph.discord_id = ? or du.discord_uid = ?", pid, pid)
+	defer rows.Close()
 	if err != nil {
 		logger.PrintLog("GetPlayer Error: %v", err.Error())
 		return err.Error(), false
 	}
-	defer rows.Close()
 
 	for rows.Next() {
 		if err := rows.Scan(&plr.Uid, &plr.SteamId, &plr.Name, &plr.Names, &plr.DonatLevel, &plr.RC); err != nil {
@@ -273,11 +285,12 @@ func GetRandomVehicle() *store.Vehicles {
 		"WHERE active = 1 " +
 		"ORDER BY RAND() " +
 		"LIMIT 1")
+	defer rows.Close()
+
 	if err != nil {
 		logger.PrintLog("GetRandomVehicle Error: %s\n", err.Error())
 		return nil
 	}
-	defer rows.Close()
 	for rows.Next() {
 		if err := rows.Scan(&veh.Classname, &veh.Image, &veh.DisplayName); err != nil {
 			logger.PrintLog("GetRandomVehicle Error: %s\n", err.Error())
