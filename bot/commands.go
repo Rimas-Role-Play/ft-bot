@@ -43,10 +43,6 @@ var (
 			Description: "Перепроверяет выданные роли",
 		},
 		{
-			Name:        "re-name-all",
-			Description: "Переименовывает всех зарегистрированных",
-		},
-		{
 			Name:        "get-him",
 			Description: "Получить данные игрока",
 			Options: []*discordgo.ApplicationCommandOption{
@@ -117,14 +113,6 @@ var (
 		},
 		"get-him": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			getHim(s, i)
-		},
-		"re-name-all": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			if !isDiscordAdmin(s, i.Member.User.ID) {
-				printHiddenMessage(s, i, "У вас нет доступа")
-				return
-			}
-			printHiddenMessage(s, i, "Запрос отправлен...")
-			go getHim(s, i)
 		},
 		"delete-undefined-users": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			if !isDiscordAdmin(s, i.Member.User.ID) {

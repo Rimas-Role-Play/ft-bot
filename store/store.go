@@ -5,6 +5,7 @@ type Player struct {
 	Uid     uint32
 	SteamId string
 	Name    string
+	Names   string
 }
 
 type PlayerStats struct {

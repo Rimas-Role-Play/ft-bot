@@ -15,14 +15,15 @@ var regRoleId = "864630308242849825"
 
 func renameUser(pid string) {
 	var err error
+	fmt.Printf("pid: %s\n", pid)
 	player, err := db.GetPlayer(pid)
 	if err != nil {
 		logger.PrintLog(err.Error())
 		return
 	}
-	_, err = s.GuildMember(config.GuildId, pid)
+	_, err = s.GuildMember(config.GuildId, player.PlayerInfo.DSUid)
 	if err != nil {
-		logger.PrintLog("User not found")
+		logger.PrintLog("User not found: %s\n", err.Error())
 		return
 	}
 	err = s.GuildMemberNickname(config.GuildId, player.PlayerInfo.DSUid, player.PlayerInfo.Name)

@@ -21,7 +21,7 @@ func init() {
 
 // Connect to database
 func connectDatabase() (*sql.DB, error) {
-	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
+	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true",
 		config.User,
 		config.Password,
 		config.IpDatabase,
