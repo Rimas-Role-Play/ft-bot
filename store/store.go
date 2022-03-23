@@ -1,5 +1,17 @@
 package store
 
+type Environment struct {
+	Token         string
+	BotPrefix     string
+	MySqlHost     string
+	MySqlPort     int
+	MySqlDatabase string
+	MySqlUser     string
+	MySqlPassword string
+	GuildId       string
+	AdminRoles    []string
+}
+
 type Player struct {
 	DSUid   string
 	Uid     uint32

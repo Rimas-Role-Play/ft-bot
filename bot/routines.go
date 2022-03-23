@@ -25,6 +25,7 @@ func StartRoutine() {
 
 // Listener of discord_queue
 func ListenQueue() {
+	updateTotalPlayersChannel()
 	queue := db.GetQueuePlayers()
 	for _, elem := range queue {
 		logger.PrintLog("%v in queue right now", elem)

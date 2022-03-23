@@ -1,8 +1,9 @@
 package bot
 
 import (
-	"ft-bot/config"
+	"fmt"
 	"ft-bot/db"
+	"ft-bot/env"
 	"ft-bot/logger"
 	"github.com/bwmarrin/discordgo"
 	"log"
@@ -52,7 +53,7 @@ func onMessageHandle(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 	}
 
-	if strings.HasPrefix(m.Content, config.BotPrefix) {
+	if strings.HasPrefix(m.Content, env.E.BotPrefix) {
 		if m.Author.ID == s.State.User.ID {
 			return
 		}

@@ -1,7 +1,7 @@
 package bot
 
 import (
-	"ft-bot/config"
+	"ft-bot/env"
 	"ft-bot/logger"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/go-sql-driver/mysql"
@@ -20,7 +20,7 @@ var s *discordgo.Session
 // Starting database
 func Start() {
 	var err error
-	s, err = discordgo.New("Bot " + config.Token)
+	s, err = discordgo.New("Bot " + env.E.Token)
 
 	if err != nil {
 		logger.PrintLog(err.Error())
@@ -48,7 +48,7 @@ func Start() {
 	// Удаляем и тут же их добавляем, потому что дискорд принимает изменения очень долго
 	for _, elem := range s.State.Guilds {
 		log.Printf("Guild: %s\n", elem.ID)
-		addRemoveCommands(elem.ID)
+		go addRemoveCommands(elem.ID)
 	}
 
 	logger.PrintLog("Start goroutines")

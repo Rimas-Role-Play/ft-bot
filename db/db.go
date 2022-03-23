@@ -3,7 +3,7 @@ package db
 import (
 	"database/sql"
 	"fmt"
-	"ft-bot/config"
+	"ft-bot/env"
 	"ft-bot/logger"
 )
 
@@ -21,12 +21,12 @@ func init() {
 
 // Connect to database
 func connectDatabase() (*sql.DB, error) {
-	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true",
-		config.User,
-		config.Password,
-		config.IpDatabase,
-		config.Port,
-		config.Database))
+	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?parseTime=true",
+		env.E.MySqlUser,
+		env.E.MySqlPassword,
+		env.E.MySqlHost,
+		env.E.MySqlPort,
+		env.E.MySqlDatabase))
 	if err != nil {
 		logger.PrintLog("Database not connected\n")
 		return nil, err

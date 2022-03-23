@@ -1,17 +1,50 @@
 package bot
 
 import (
+	"encoding/json"
 	"fmt"
-	"ft-bot/config"
 	"ft-bot/db"
+	"ft-bot/env"
 	"ft-bot/logger"
 	"ft-bot/store"
 	"github.com/bwmarrin/discordgo"
+	"io"
 	"log"
+	"net/http"
 )
 
 var vipRoleId = "871508004795723787"
 var regRoleId = "864630308242849825"
+
+func GetLkApi() (*GovAPI, error) {
+	var players GovAPI
+	var client http.Client
+	resp, err := client.Get("https://lk.rimasrp.life/api/gov")
+	defer resp.Body.Close()
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
+
+	if resp.StatusCode == http.StatusOK {
+		bodyBytes, err := io.ReadAll(resp.Body)
+		if err != nil {
+			log.Println(err)
+			return nil, err
+		}
+		if !json.Valid(bodyBytes) {
+			fmt.Println("json is invalid")
+			return nil, err
+		}
+		err = json.Unmarshal(bodyBytes, &players)
+
+		if err != nil {
+			fmt.Println(err)
+			return nil, err
+		}
+	}
+	return &players, nil
+}
 
 func renameUser(pid string) {
 	var err error
@@ -21,12 +54,12 @@ func renameUser(pid string) {
 		logger.PrintLog(err.Error())
 		return
 	}
-	_, err = s.GuildMember(config.GuildId, player.PlayerInfo.DSUid)
+	_, err = s.GuildMember(env.E.GuildId, player.PlayerInfo.DSUid)
 	if err != nil {
 		logger.PrintLog("User not found: %s\n", err.Error())
 		return
 	}
-	err = s.GuildMemberNickname(config.GuildId, player.PlayerInfo.DSUid, player.PlayerInfo.Name)
+	err = s.GuildMemberNickname(env.E.GuildId, player.PlayerInfo.DSUid, player.PlayerInfo.Name)
 	if err != nil {
 		logger.PrintLog("Cant rename %v user", player.PlayerInfo.Name)
 		logger.PrintLog(err.Error())
@@ -35,12 +68,12 @@ func renameUser(pid string) {
 
 // Check is discord admin
 func isDiscordAdmin(s *discordgo.Session, id string) bool {
-	g, err := s.GuildMember(config.GuildId, id)
+	g, err := s.GuildMember(env.E.GuildId, id)
 	if err != nil {
 		return false
 	}
 	roles := g.Roles
-	for _, i := range config.GetAdminRoles() {
+	for _, i := range env.E.AdminRoles {
 		for _, y := range roles {
 			if i == y {
 				log.Println("Admin found")
@@ -54,7 +87,7 @@ func isDiscordAdmin(s *discordgo.Session, id string) bool {
 
 // Check is user have Mute role
 func isMuted(s *discordgo.Session, id string) bool {
-	g, err := s.GuildMember(config.GuildId, id)
+	g, err := s.GuildMember(env.E.GuildId, id)
 	if err != nil {
 		return false
 	}
@@ -74,7 +107,7 @@ func isMuted(s *discordgo.Session, id string) bool {
 func deleteUndefinedUsers() {
 	uids := db.GetAllDiscordUids()
 	for _, elem := range uids {
-		_, err := s.GuildMember(config.GuildId, elem)
+		_, err := s.GuildMember(env.E.GuildId, elem)
 		if err != nil {
 			log.Println(err.Error())
 			log.Printf("User: %v will be deleted", elem)
